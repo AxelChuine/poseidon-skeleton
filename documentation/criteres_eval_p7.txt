@@ -1,0 +1,47 @@
+
+Critères d'évaluation
+Implémenter une API permettant les opérations CRUD
+
+Le code est complet si :
+
+❒ le projet compile avec Maven ;
+
+❒ le projet est structuré de manière conventionnelle : le SRC Main Java et les classes de test sont séparés ;
+
+❒ les tests unitaires couvrent tous les services CRUD ;
+
+❒ les 4 opérations CRUD (Create, Read, Update, Delete) ont été toutes implémentées sur les entités suivantes :
+
+    enchères (‘Bids’),
+    Curve Point,
+    notations (‘Ratings’),
+    règles (‘Rules’),
+    échanges (‘Trades’),
+    utilisateurs (‘Users’) ;
+
+❒ les commentaires expliquent l’implémentation ;
+
+❒ les noms de méthodes sont écrits en lowerCamelCase ;
+
+❒ l’indentation est correcte ;
+
+❒ une validation de données est en place pour vérifier que :
+
+    les champs numériques contiennent uniquement des chiffres,
+    les mots de passe sont d’au moins 8 caractères, sont composés d’au moins une lettre majuscule, et contiennent au moins un chiffre et un symbole.
+
+Sécuriser l’API avec un système d’authentification
+
+Le code est complet si :
+
+❒ la sécurité est mise en place avec Spring Security ;
+
+❒ il est structuré et si la partie Security est dans un (ou plusieurs) packages séparé(s) du reste de l’application ;
+
+❒ un identifiant et un mot de passe sont nécessaires ;
+
+❒ le hash du mot de passe a été implémenté ;
+
+❒ la méthode d'authentification via session est implémentée ;
+
+❒ la javadoc est en place sur les méthodes des classes liées à la sécurité.

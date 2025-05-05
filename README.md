@@ -25,3 +25,7 @@
 ## Security
 1. Create user service to load user from  database and place in package com.nnk.springboot.services
 2. Add configuration class and place in package com.nnk.springboot.config
+
+
+## Database 
+1. Use of mariadb as a database client instead of mysql.

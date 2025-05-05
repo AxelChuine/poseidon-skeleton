@@ -1,0 +1,13 @@
+ il s’agit de mettre en place une “session based authentication”. Un “token based authentication” avec l’oauth serveur géré par GitHub n’est pas exigé pour ce projet, cependant elle pourrait intéresser les étudiants.
+
+Les étudiants doivent suivre le formatage de base des blocs Javadoc, comme dans ces exemples :
+
+/**
+* Multiple lines of Javadoc text are written here,
+* wrapped normally...
+*/
+public int method(String p1) { ... }
+
+Ou
+
+/** An especially short bit of Javadoc. */
