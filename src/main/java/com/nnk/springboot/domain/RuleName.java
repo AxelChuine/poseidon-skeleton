@@ -17,7 +17,7 @@ public class RuleName {
 
     @Id
     @Column(name = "Id", nullable = false)
-    private Byte id;
+    private Long id;
 
     @Column(name = "name", length = 125)
     private String name;
@@ -36,4 +36,7 @@ public class RuleName {
 
     @Column(name = "sqlPart", length = 125)
     private String sqlPart;
+
+    public RuleName(String ruleName, String description, String json, String template, String sql, String sqlPart) {
+    }
 }

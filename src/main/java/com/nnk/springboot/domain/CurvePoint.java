@@ -1,27 +1,27 @@
 package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
-import org.hibernate.validator.constraints.Length;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 
 @Entity
 @Table(name = "curvepoint")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CurvePoint {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "CurveId")
-    private Integer curveId;
+    private Long curveId;
 
     @Column(name = "asOfDate")
     private LocalDateTime asOfDate;
@@ -33,54 +33,9 @@ public class CurvePoint {
     private Double value;
 
     @Column(name = "creationDate")
-    private Instant creationDate;
+    private LocalDateTime creationDate;
 
-    public Instant getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Instant creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Double getValue() {
-        return value;
-    }
-
-    public void setValue(Double value) {
-        this.value = value;
-    }
-
-    public Double getTerm() {
-        return term;
-    }
-
-    public void setTerm(Double term) {
-        this.term = term;
-    }
-
-    public LocalDateTime getAsOfDate() {
-        return asOfDate;
-    }
-
-    public void setAsOfDate(LocalDateTime asOfDate) {
-        this.asOfDate = asOfDate;
-    }
-
-    public Integer getCurveId() {
-        return curveId;
-    }
-
-    public void setCurveId(Integer curveId) {
-        this.curveId = curveId;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public CurvePoint(int i, double v, double v1) {
     }
     // TODO: Map columns in data table CURVEPOINT with corresponding java fields
 

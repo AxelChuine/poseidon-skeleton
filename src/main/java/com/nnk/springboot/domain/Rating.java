@@ -5,10 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
 
 @Entity
 @Table(name = "rating")
@@ -20,7 +16,7 @@ public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "moodysRating", length = 125)
     private String moodysRating;
@@ -33,4 +29,7 @@ public class Rating {
 
     @Column(name = "orderNumber")
     private Integer orderNumber;
+
+    public Rating(String moodysRating, String sandPRating, String fitchRating, int i) {
+    }
 }

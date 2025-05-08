@@ -18,7 +18,7 @@ public class BidList {
 
     @Id
     @Column(name = "BidListId", nullable = false)
-    private Byte id;
+    private Long id;
 
     @Column(name = "account", nullable = false, length = 30)
     private String account;
@@ -83,4 +83,9 @@ public class BidList {
     @Column(name = "side", length = 125)
     private String side;
 
+    public BidList(String accountTest, String typeTest, double v) {
+        this.account = accountTest;
+        this.type = typeTest;
+        this.bidQuantity = v;
+    }
 }

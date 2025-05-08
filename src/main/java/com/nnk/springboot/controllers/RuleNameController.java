@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.RuleName;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.validation.Valid;
 
 @Controller
 public class RuleNameController {
@@ -34,20 +34,20 @@ public class RuleNameController {
     }
 
     @GetMapping("/ruleName/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+    public String showUpdateForm(@PathVariable("id") Long id, Model model) {
         // TODO: get RuleName by Id and to model then show to the form
         return "ruleName/update";
     }
 
     @PostMapping("/ruleName/update/{id}")
-    public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
+    public String updateRuleName(@PathVariable("id") Long id, @Valid RuleName ruleName,
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update RuleName and return RuleName list
         return "redirect:/ruleName/list";
     }
 
     @GetMapping("/ruleName/delete/{id}")
-    public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
+    public String deleteRuleName(@PathVariable("id") Long id, Model model) {
         // TODO: Find RuleName by Id and delete the RuleName, return to Rule list
         return "redirect:/ruleName/list";
     }
