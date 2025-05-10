@@ -29,3 +29,4 @@
 
 ## Database 
 1. Use of mariadb as a database client instead of mysql.
+2. The ultra secure password for the database is rootroot

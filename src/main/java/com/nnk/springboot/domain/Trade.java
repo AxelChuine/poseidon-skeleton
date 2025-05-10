@@ -18,7 +18,7 @@ public class Trade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TradeId", nullable = false)
-    private Long id;
+    private Integer id;
 
     @Column(name = "account", nullable = false, length = 30)
     private String account;

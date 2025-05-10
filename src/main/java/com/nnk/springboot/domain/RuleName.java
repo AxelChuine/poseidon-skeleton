@@ -17,7 +17,7 @@ public class RuleName {
 
     @Id
     @Column(name = "Id", nullable = false)
-    private Long id;
+    private Integer id;
 
     @Column(name = "name", length = 125)
     private String name;

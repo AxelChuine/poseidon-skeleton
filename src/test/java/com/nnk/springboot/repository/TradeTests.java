@@ -36,7 +36,7 @@ public class TradeTests {
 		Assertions.assertTrue(listResult.size() > 0);
 
 		// Delete
-		Long id = trade.getId();
+		Integer id = trade.getId();
 		tradeRepository.delete(trade);
 		Optional<Trade> tradeList = tradeRepository.findById(id);
 		Assertions.assertFalse(tradeList.isPresent());

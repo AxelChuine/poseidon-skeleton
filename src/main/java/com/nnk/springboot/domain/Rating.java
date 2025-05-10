@@ -16,7 +16,7 @@ public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
-    private Long id;
+    private Integer id;
 
     @Column(name = "moodysRating", length = 125)
     private String moodysRating;

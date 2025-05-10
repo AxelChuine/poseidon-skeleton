@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,8 +17,9 @@ public class BidList {
 
 
     @Id
-    @Column(name = "BidListId", nullable = false)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bid_list_id", nullable = false)
+    private Integer id;
 
     @Column(name = "account", nullable = false, length = 30)
     private String account;
@@ -42,7 +43,7 @@ public class BidList {
     private String benchmark;
 
     @Column(name = "bidListDate")
-    private LocalDateTime bidListDate;
+    private Timestamp bidListDate;
 
     @Column(name = "commentary", length = 125)
     private String commentary;
@@ -63,13 +64,13 @@ public class BidList {
     private String creationName;
 
     @Column(name = "creationDate")
-    private LocalDateTime creationDate;
+    private Timestamp creationDate;
 
     @Column(name = "revisionName", length = 125)
     private String revisionName;
 
     @Column(name = "revisionDate")
-    private LocalDateTime revisionDate;
+    private Timestamp revisionDate;
 
     @Column(name = "dealName", length = 125)
     private String dealName;

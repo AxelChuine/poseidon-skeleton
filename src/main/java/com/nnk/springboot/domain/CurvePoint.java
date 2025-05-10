@@ -18,7 +18,7 @@ public class CurvePoint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
-    private Long id;
+    private Integer id;
 
     @Column(name = "CurveId")
     private Long curveId;

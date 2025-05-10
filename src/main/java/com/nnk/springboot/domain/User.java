@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class User {
     @Id
     @Column(name = "Id", nullable = false)
-    private Long id;
+    private Integer id;
 
     @Column(name = "username", length = 125)
     private String username;
