@@ -26,7 +26,7 @@ public class CurvePointTests {
 		Assertions.assertTrue(curvePoint.getCurveId() == 10);
 
 		// Update
-		curvePoint.setCurveId(20L);
+		curvePoint.setCurveId(20);
 		curvePoint = curvePointRepository.save(curvePoint);
 		Assertions.assertTrue(curvePoint.getCurveId() == 20);
 

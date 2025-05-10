@@ -21,7 +21,7 @@ public class CurvePoint {
     private Integer id;
 
     @Column(name = "CurveId")
-    private Long curveId;
+    private Integer curveId;
 
     @Column(name = "asOfDate")
     private LocalDateTime asOfDate;
@@ -35,8 +35,10 @@ public class CurvePoint {
     @Column(name = "creationDate")
     private LocalDateTime creationDate;
 
-    public CurvePoint(int i, double v, double v1) {
+    public CurvePoint(int curveId, double term, double value) {
+        this.curveId = curveId;
+        this.term = term;
+        this.value = value;
     }
-    // TODO: Map columns in data table CURVEPOINT with corresponding java fields
 
 }
