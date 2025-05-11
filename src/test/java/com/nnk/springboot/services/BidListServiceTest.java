@@ -29,4 +29,14 @@ public class BidListServiceTest {
         Assertions.assertThat(toCompare.toString()).isEqualTo(bid.toString());
         Assertions.assertThat(toCompare.hashCode()).isEqualTo(bid.hashCode());
     }
+
+    @Test
+    public void updateBidListShouldUpdateBidList() {
+        Mockito.when(repository.save(bid)).thenReturn(bid);
+        BidList toCompare = service.update(bid);
+
+        Assertions.assertThat(toCompare).isEqualTo(bid);
+        Assertions.assertThat(toCompare.toString()).isEqualTo(bid.toString());
+        Assertions.assertThat(toCompare.hashCode()).isEqualTo(bid.hashCode());
+    }
 }
