@@ -39,4 +39,10 @@ public class BidListServiceTest {
         Assertions.assertThat(toCompare.toString()).isEqualTo(bid.toString());
         Assertions.assertThat(toCompare.hashCode()).isEqualTo(bid.hashCode());
     }
+
+    @Test
+    public void deleteBidListShouldDeleteBidList() {
+        service.delete(bid.getId());
+        Mockito.verify(repository, Mockito.times(1)).deleteById(bid.getId());
+    }
 }
