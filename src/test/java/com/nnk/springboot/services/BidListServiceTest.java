@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+
 @ExtendWith(MockitoExtension.class)
 public class BidListServiceTest {
     @InjectMocks
@@ -44,5 +46,19 @@ public class BidListServiceTest {
     public void deleteBidListShouldDeleteBidList() {
         service.delete(bid.getId());
         Mockito.verify(repository, Mockito.times(1)).deleteById(bid.getId());
+    }
+
+    @Test
+    public void findAllBidListShouldReturnAllBidList() {
+        List<BidList> bidList = List.of(bid);
+
+        Mockito.when(repository.findAll()).thenReturn(bidList);
+        List<BidList> toCompare = this.service.findAll();
+
+        Assertions.assertThat(service.findAll()).containsExactly(bid);
+        Assertions.assertThat(toCompare).isNotEmpty();
+        Assertions.assertThat(toCompare).isNotNull();
+        Assertions.assertThat(toCompare.toString()).isEqualTo(bidList.toString());
+        Assertions.assertThat(toCompare.hashCode()).isEqualTo(bidList.hashCode());
     }
 }
