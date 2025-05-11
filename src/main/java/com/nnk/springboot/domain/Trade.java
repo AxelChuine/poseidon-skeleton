@@ -81,5 +81,7 @@ public class Trade {
     private String side;
 
     public Trade(String tradeAccount, String type) {
+        this.account = tradeAccount;
+        this.type = type;
     }
 }
