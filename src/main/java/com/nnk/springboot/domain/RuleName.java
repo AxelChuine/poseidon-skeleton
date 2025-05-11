@@ -1,21 +1,19 @@
 package com.nnk.springboot.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "rulename")
+@Table(name = "RuleName")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class RuleName {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
     private Integer id;
 
@@ -38,5 +36,11 @@ public class RuleName {
     private String sqlPart;
 
     public RuleName(String ruleName, String description, String json, String template, String sql, String sqlPart) {
+        this.name = ruleName;
+        this.description = description;
+        this.json = json;
+        this.template = template;
+        this.sqlStr = sql;
+        this.sqlPart = sqlPart;
     }
 }
