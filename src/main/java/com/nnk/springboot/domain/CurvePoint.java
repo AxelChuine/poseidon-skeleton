@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "curvepoint")
+@Table(name = "CurvePoint")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

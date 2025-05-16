@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "bidlist")
+@Table(name = "BidList")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -6,12 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users")
+@Table(name = "Users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
     private Integer id;
 
@@ -27,4 +28,10 @@ public class User {
     @Column(name = "role", length = 125)
     private String role;
 
+    public User(String fullName, String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.fullname = fullName;
+        this.role = "ROLE_USER";
+    }
 }
