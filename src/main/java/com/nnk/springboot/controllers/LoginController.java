@@ -1,7 +1,7 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.nnk.springboot.exceptions.UserListIsEmptyException;
+import com.nnk.springboot.services.mapper.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,8 +11,12 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("app")
 public class LoginController {
 
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserService service;
+
+    public LoginController(UserService service) {
+        this.service = service;
+    }
 
     @GetMapping("login")
     public ModelAndView login() {
@@ -22,9 +26,9 @@ public class LoginController {
     }
 
     @GetMapping("secure/article-details")
-    public ModelAndView getAllUserArticles() {
+    public ModelAndView getAllUserArticles() throws UserListIsEmptyException {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("users", userRepository.findAll());
+        mav.addObject("users", service.findAll());
         mav.setViewName("user/list");
         return mav;
     }
