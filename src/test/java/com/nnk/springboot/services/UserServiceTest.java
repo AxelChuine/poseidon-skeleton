@@ -44,7 +44,7 @@ public class UserServiceTest {
 
     private final String fullName = "fullName";
 
-    private final String role = "ROLE_USER";
+    private final String role = "USER";
 
     private List<User> list;
 

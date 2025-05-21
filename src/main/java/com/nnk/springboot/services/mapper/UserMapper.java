@@ -34,7 +34,7 @@ public class UserMapper {
         model.setUsername(dto.getUsername());
         model.setFullname(dto.getFullname());
         model.setPassword(dto.getPassword());
-        model.setRole(Objects.isNull(dto.getRole()) ? "ROLE_USER" : dto.getRole());
+        model.setRole(Objects.isNull(dto.getRole()) ? "USER" : dto.getRole());
         return model;
     }
 
@@ -44,6 +44,7 @@ public class UserMapper {
         model.setUsername(Objects.nonNull(update.getUsername()) ? update.getUsername() : dtoToUpdate.getUsername());
         model.setFullname(Objects.nonNull(update.getFullname()) ? update.getFullname() : dtoToUpdate.getFullname());
         model.setPassword(Objects.nonNull(update.getPassword()) ? update.getPassword() : dtoToUpdate.getPassword());
+        model.setRole(Objects.nonNull(update.getRole()) ? update.getRole() : dtoToUpdate.getRole());
         return model;
     }
 
