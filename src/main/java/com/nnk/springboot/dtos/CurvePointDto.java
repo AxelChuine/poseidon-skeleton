@@ -1,20 +1,22 @@
 package com.nnk.springboot.dtos;
 
-import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CurvePointDto {
     private Integer id;
+
+    @NotNull
     private Integer curveId;
-    private LocalDateTime asOfDate;
+    private Timestamp asOfDate;
     private Double term;
     private Double value;
-    private LocalDateTime creationDate;
+    private Timestamp creationDate;
 }

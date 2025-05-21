@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 
 @Entity
@@ -24,7 +24,7 @@ public class CurvePoint {
     private Integer curveId;
 
     @Column(name = "asOfDate")
-    private LocalDateTime asOfDate;
+    private Timestamp asOfDate;
 
     @Column(name = "term")
     private Double term;
@@ -33,7 +33,7 @@ public class CurvePoint {
     private Double value;
 
     @Column(name = "creationDate")
-    private LocalDateTime creationDate;
+    private Timestamp creationDate;
 
     public CurvePoint(int curveId, double term, double value) {
         this.curveId = curveId;
