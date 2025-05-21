@@ -34,7 +34,7 @@ public class UserService {
     }
 
     public UserDto create(final UserDto dto) throws ParameterNotProvidedException {
-        if (Objects.isNull(dto) && (Objects.isNull(dto.getUsername()) || Objects.isNull(dto.getFullname()) && Objects.isNull(dto.getPassword()))) {
+        if (Objects.isNull(dto) || (Objects.isNull(dto.getUsername()) || Objects.isNull(dto.getFullname()) && Objects.isNull(dto.getPassword()))) {
             throw new ParameterNotProvidedException("Le nom d'utilisateur et/ou le mot n'ont pas été renseigné ou mal. Veuillez recommencer.");
         }
         return this.mapper.toDto(this.repository.save(this.mapper.toModel(dto)));
