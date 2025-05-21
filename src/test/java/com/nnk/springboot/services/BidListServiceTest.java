@@ -1,7 +1,10 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.dtos.BidListDto;
+import com.nnk.springboot.exceptions.ParameterNotProvidedException;
 import com.nnk.springboot.repositories.BidListRepository;
+import com.nnk.springboot.services.mapper.BidListMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,16 +23,22 @@ public class BidListServiceTest {
     @Mock
     private BidListRepository repository;
 
+    @Mock
+    private BidListMapper mapper;
+
     private final BidList bid = new BidList("Account Test", "Type Test", 10d);
+    private final BidListDto bidDto = new BidListDto("Account Test", "Type Test", 10d);
 
     @Test
     public void createShouldCreateBidList() {
+        Mockito.when(this.mapper.toModel(bidDto)).thenReturn(bid);
         Mockito.when(repository.save(bid)).thenReturn(bid);
-        BidList toCompare = service.create(bid);
+        Mockito.when(this.mapper.toDto(bid)).thenReturn(this.bidDto);
+        BidListDto toCompare = service.create(bidDto);
 
-        Assertions.assertThat(toCompare).isEqualTo(bid);
-        Assertions.assertThat(toCompare.toString()).isEqualTo(bid.toString());
-        Assertions.assertThat(toCompare.hashCode()).isEqualTo(bid.hashCode());
+        Assertions.assertThat(toCompare).isEqualTo(bidDto);
+        Assertions.assertThat(toCompare.toString()).isEqualTo(bidDto.toString());
+        Assertions.assertThat(toCompare.hashCode()).isEqualTo(bidDto.hashCode());
     }
 
     @Test
@@ -43,22 +52,26 @@ public class BidListServiceTest {
     }
 
     @Test
-    public void deleteBidListShouldDeleteBidList() {
-        service.delete(bid.getId());
-        Mockito.verify(repository, Mockito.times(1)).deleteById(bid.getId());
+    public void deleteBidListShouldDeleteBidList() throws ParameterNotProvidedException {
+        this.bidDto.setId(1);
+
+        service.delete(bidDto.getId());
+        Mockito.verify(repository, Mockito.times(1)).deleteById(bidDto.getId());
     }
 
     @Test
     public void findAllBidListShouldReturnAllBidList() {
         List<BidList> bidList = List.of(bid);
+        List<BidListDto> listDto = List.of(bidDto);
 
         Mockito.when(repository.findAll()).thenReturn(bidList);
-        List<BidList> toCompare = this.service.findAll();
+        Mockito.when(mapper.toDtoList(bidList)).thenReturn(listDto);
+        List<BidListDto> toCompare = this.service.findAll();
 
-        Assertions.assertThat(service.findAll()).containsExactly(bid);
+        Assertions.assertThat(toCompare).containsExactly(bidDto);
         Assertions.assertThat(toCompare).isNotEmpty();
         Assertions.assertThat(toCompare).isNotNull();
-        Assertions.assertThat(toCompare.toString()).isEqualTo(bidList.toString());
-        Assertions.assertThat(toCompare.hashCode()).isEqualTo(bidList.hashCode());
+        Assertions.assertThat(toCompare.toString()).isEqualTo(listDto.toString());
+        Assertions.assertThat(toCompare.hashCode()).isEqualTo(listDto.hashCode());
     }
 }

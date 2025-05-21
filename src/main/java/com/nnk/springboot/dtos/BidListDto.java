@@ -36,4 +36,10 @@ public class BidListDto {
     private String dealType;
     private String sourceListId;
     private String side;
+
+    public BidListDto(String accountTest, String typeTest, double v) {
+        this.account = accountTest;
+        this.type = typeTest;
+        this.bidQuantity = v;
+    }
 }

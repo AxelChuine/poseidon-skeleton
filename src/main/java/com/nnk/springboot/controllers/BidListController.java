@@ -1,6 +1,8 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.dtos.BidListDto;
+import com.nnk.springboot.exceptions.ParameterNotProvidedException;
 import com.nnk.springboot.services.BidListService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+import java.util.Objects;
 
 
 @Controller
@@ -22,9 +26,8 @@ public class BidListController {
     }
 
     @RequestMapping("/bidList/list")
-    public String home(Model model)
-    {
-        // TODO: call service find all bids to show to the view
+    public String home(Model model) {
+        model.addAttribute("bids", service.findAll());
         return "bidList/list";
     }
 
@@ -34,27 +37,40 @@ public class BidListController {
     }
 
     @PostMapping("/bidList/validate")
-    public String validate(@Valid BidList bid, BindingResult result, Model model) {
+    public String validate(@Valid BidListDto bid, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return bid list
+        List<BidListDto> list = this.service.findAll();
+        if (!result.hasErrors()) {
+            list.add(this.service.create(bid));
+            model.addAttribute("bids", list);
+        }
         return "bidList/add";
     }
 
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get Bid by Id and to model then show to the form
+        BidListDto bid = this.service.findById(id);
+        if (Objects.nonNull(bid.getAccount())) {
+            model.addAttribute("bid", bid);
+        }
         return "bidList/update";
     }
 
     @PostMapping("/bidList/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
+    public String updateBid(@PathVariable("id") Integer id, @Valid BidListDto bidList,
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Bid and return list Bid
+        if (!result.hasErrors()) {
+            model.addAttribute("bid", this.service.create(bidList));
+        }
         return "redirect:/bidList/list";
     }
 
     @GetMapping("/bidList/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id, Model model) {
+    public String deleteBid(@PathVariable("id") Integer id, Model model) throws ParameterNotProvidedException {
         // TODO: Find Bid by Id and delete the bid, return to Bid list
+        this.service.delete(id);
         return "redirect:/bidList/list";
     }
 }
