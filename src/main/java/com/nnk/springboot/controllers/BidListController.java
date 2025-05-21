@@ -1,7 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
-
+import com.nnk.springboot.services.BidListService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class BidListController {
-    // TODO: Inject Bid service
+    private final BidListService service;
+
+    public BidListController(BidListService service) {
+        this.service = service;
+    }
 
     @RequestMapping("/bidList/list")
     public String home(Model model)

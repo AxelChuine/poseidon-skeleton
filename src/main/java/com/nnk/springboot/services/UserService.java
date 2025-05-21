@@ -1,10 +1,11 @@
-package com.nnk.springboot.services.mapper;
+package com.nnk.springboot.services;
 
 import com.nnk.springboot.dtos.UserDto;
 import com.nnk.springboot.exceptions.ParameterNotProvidedException;
 import com.nnk.springboot.exceptions.UserListIsEmptyException;
 import com.nnk.springboot.exceptions.UserNotFoundException;
 import com.nnk.springboot.repositories.UserRepository;
+import com.nnk.springboot.services.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class UserService {
         return this.mapper.toDto(this.repository.save(this.mapper.toModel(dto)));
     }
 
-    public UserDto update(final UserDto dto) throws ParameterNotProvidedException {
+    public UserDto save(final UserDto dto) throws ParameterNotProvidedException {
         if (Objects.isNull(dto)) {
             throw new ParameterNotProvidedException("Aucun utilisateur n'a été renseigné. Veuillez recommencer.");
         }
@@ -57,5 +58,9 @@ public class UserService {
             throw new UserListIsEmptyException();
         }
         return list;
+    }
+
+    public UserDto findById(Integer id) {
+        return null;
     }
 }

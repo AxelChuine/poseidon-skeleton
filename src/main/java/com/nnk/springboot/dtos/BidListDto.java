@@ -1,5 +1,6 @@
 package com.nnk.springboot.dtos;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,10 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class BidListDto {
     private Integer id;
+    @NotNull
     private String account;
+
+    @NotNull
     private String type;
     private Double bidQuantity;
     private Double askQuantity;

@@ -7,7 +7,6 @@ import com.nnk.springboot.exceptions.UserListIsEmptyException;
 import com.nnk.springboot.exceptions.UserNotFoundException;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.services.mapper.UserMapper;
-import com.nnk.springboot.services.mapper.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
