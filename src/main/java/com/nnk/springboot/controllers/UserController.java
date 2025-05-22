@@ -35,6 +35,16 @@ public class UserController {
         return "user/add";
     }
 
+
+    /**
+     * A la création de l'utilisateur, le mot de passe est chiffré avec BCrypt avvant d'être enregistré en BDD.
+     * @param user
+     * @param result
+     * @param model
+     * @return
+     * @throws ParameterNotProvidedException
+     * @throws UserListIsEmptyException
+     */
     @PostMapping("/user/validate")
     public String validate(@Valid UserDto user, BindingResult result, Model model) throws ParameterNotProvidedException, UserListIsEmptyException {
         if (!result.hasErrors()) {
