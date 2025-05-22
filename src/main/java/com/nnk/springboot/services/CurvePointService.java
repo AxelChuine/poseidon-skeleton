@@ -26,7 +26,7 @@ public class CurvePointService {
 
     public List<CurvePointDto> findAll() throws CurvePointNotFoundException {
         List<CurvePointDto> list = this.mapper.toDtoList(this.repository.findAll());
-        if (Objects.isNull(list)) {
+        if (Objects.isNull(list) || list.isEmpty()) {
             throw new CurvePointNotFoundException();
         }
         return list;
@@ -46,13 +46,23 @@ public class CurvePointService {
         return this.mapper.toDto(this.repository.findById(id).orElse(null));
     }
 
-    // FIXME: Avec ce fonctionnement, certains champs seront vides sans que ce soit nécessairement la volonté de l'utilisateur
-    public CurvePointDto update(final Integer id, final CurvePointDto curvePoint) {
+    public CurvePointDto update(final Integer id, final CurvePointDto curvePoint) throws ParameterNotProvidedException, CurvePointNotFoundException {
+        if (Objects.isNull(id) || Objects.isNull(curvePoint)) {
+            throw new ParameterNotProvidedException();
+        }
         Optional<CurvePoint> optional = this.repository.findById(id);
         if (optional.isPresent()) {
             curvePoint.setId(id);
-            return this.mapper.toDto(this.repository.save(this.mapper.toModel(curvePoint)));
+            return this.mapper.toDto(this.repository.save(this.mapper.update(this.mapper.toDto(optional.get()), curvePoint)));
+        } else {
+            throw new CurvePointNotFoundException();
         }
-        return null;
+    }
+
+    public void deleteById(Integer id) throws ParameterNotProvidedException {
+        if (Objects.isNull(id)) {
+            throw new ParameterNotProvidedException();
+        }
+        this.repository.deleteById(id);
     }
 }

@@ -59,7 +59,7 @@ public class CurvePointController {
 
     @PostMapping("/curvePoint/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid CurvePointDto curvePoint,
-                             BindingResult result, Model model) throws CurvePointNotFoundException {
+                             BindingResult result, Model model) throws CurvePointNotFoundException, ParameterNotProvidedException {
         // TODO: check required fields, if valid call service to update Curve and return Curve list
         List<CurvePointDto> list = this.service.findAll();
         if (!result.hasErrors() && Objects.nonNull(id)) {
@@ -70,8 +70,11 @@ public class CurvePointController {
     }
 
     @GetMapping("/curvePoint/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id, Model model) {
+    public String deleteBid(@PathVariable("id") Integer id, Model model) throws ParameterNotProvidedException, CurvePointNotFoundException {
         // TODO: Find Curve by Id and delete the Curve, return to Curve list
+        this.service.deleteById(id);
+        List<CurvePointDto> list = this.service.findAll();
+        model.addAttribute("curvePoints", list);
         return "redirect:/curvePoint/list";
     }
 }
