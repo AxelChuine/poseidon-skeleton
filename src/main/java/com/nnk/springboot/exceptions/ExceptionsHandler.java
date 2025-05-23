@@ -31,4 +31,14 @@ public class ExceptionsHandler {
     public ResponseEntity<String> handleUserListIsEmptyException(final UserListIsEmptyException e) {
         return new ResponseEntity<>(e.getMessage(), e.getCode());
     }
+
+    @ExceptionHandler(RatingListNullPointerException.class)
+    public ResponseEntity<String> handleRatingListNullPointerException(final RatingListNullPointerException e) {
+        return new ResponseEntity<>(e.getMessage(), e.getCode());
+    }
+
+    @ExceptionHandler(RatingNullPointerException.class)
+    public ResponseEntity<String> handleRatingNullPointerException(final RatingNullPointerException e) {
+        return new ResponseEntity<>(e.getMessage(), e.getCode());
+    }
 }
