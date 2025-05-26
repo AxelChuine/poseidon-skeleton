@@ -1,9 +1,9 @@
-package com.nnk.springboot.services.mappers;
+package com.nnk.springboot.services.mappers.impl;
 
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.dtos.CurvePointDto;
 import com.nnk.springboot.services.CurvePointService;
-import com.nnk.springboot.services.mapper.CurvePointMapper;
+import com.nnk.springboot.services.mapper.impl.CurvePointMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

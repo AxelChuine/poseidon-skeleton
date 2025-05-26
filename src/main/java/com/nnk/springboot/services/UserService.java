@@ -5,7 +5,7 @@ import com.nnk.springboot.exceptions.ParameterNotProvidedException;
 import com.nnk.springboot.exceptions.UserListIsEmptyException;
 import com.nnk.springboot.exceptions.UserNotFoundException;
 import com.nnk.springboot.repositories.UserRepository;
-import com.nnk.springboot.services.mapper.UserMapper;
+import com.nnk.springboot.services.mapper.impl.UserMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

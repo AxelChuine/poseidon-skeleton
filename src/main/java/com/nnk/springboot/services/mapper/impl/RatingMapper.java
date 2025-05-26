@@ -1,7 +1,8 @@
-package com.nnk.springboot.services.mapper;
+package com.nnk.springboot.services.mapper.impl;
 
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.dtos.RatingDto;
+import com.nnk.springboot.services.mapper.IMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class RatingMapper {
+public class RatingMapper implements IMapper<Rating, RatingDto> {
 
     public RatingDto toDto(Rating model) {
         if (Objects.isNull(model)) {

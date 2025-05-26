@@ -1,7 +1,8 @@
-package com.nnk.springboot.services.mapper;
+package com.nnk.springboot.services.mapper.impl;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.dtos.UserDto;
+import com.nnk.springboot.services.mapper.IMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class UserMapper {
+public class UserMapper  implements IMapper<User, UserDto> {
 
     public UserDto toDto(final User model) {
         if (Objects.isNull(model)) {

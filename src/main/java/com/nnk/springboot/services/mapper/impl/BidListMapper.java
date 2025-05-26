@@ -1,7 +1,8 @@
-package com.nnk.springboot.services.mapper;
+package com.nnk.springboot.services.mapper.impl;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.dtos.BidListDto;
+import com.nnk.springboot.services.mapper.IMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,9 +10,10 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class BidListMapper {
+public class BidListMapper implements IMapper<BidList, BidListDto> {
 
 
+    @Override
     public BidListDto toDto(BidList model) {
         if (Objects.isNull(model)) {
             return null;
@@ -42,6 +44,7 @@ public class BidListMapper {
         return dto;
     }
 
+    @Override
     public List<BidListDto> toDtoList(List<BidList> list) {
         List<BidListDto> dtoList = new ArrayList<>();
         for (BidList bid : list) {
@@ -50,6 +53,7 @@ public class BidListMapper {
         return dtoList;
     }
 
+    @Override
     public BidList toModel(BidListDto dto) {
         if (Objects.isNull(dto)) {
             return null;
@@ -78,5 +82,10 @@ public class BidListMapper {
         model.setSourceListId(dto.getSourceListId());
         model.setSide(dto.getSide());
         return model;
+    }
+
+    @Override
+    public BidList update(BidListDto dtoToUpdate, BidListDto dto) {
+        return null;
     }
 }

@@ -1,8 +1,8 @@
-package com.nnk.springboot.services.mappers;
+package com.nnk.springboot.services.mappers.impl;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.dtos.BidListDto;
-import com.nnk.springboot.services.mapper.BidListMapper;
+import com.nnk.springboot.services.mapper.impl.BidListMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

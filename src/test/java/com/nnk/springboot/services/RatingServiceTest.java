@@ -5,7 +5,7 @@ import com.nnk.springboot.dtos.RatingDto;
 import com.nnk.springboot.exceptions.ParameterNotProvidedException;
 import com.nnk.springboot.exceptions.RatingListNullPointerException;
 import com.nnk.springboot.repositories.RatingRepository;
-import com.nnk.springboot.services.mapper.RatingMapper;
+import com.nnk.springboot.services.mapper.impl.RatingMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

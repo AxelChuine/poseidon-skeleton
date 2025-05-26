@@ -4,7 +4,7 @@ import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.dtos.BidListDto;
 import com.nnk.springboot.exceptions.ParameterNotProvidedException;
 import com.nnk.springboot.repositories.BidListRepository;
-import com.nnk.springboot.services.mapper.BidListMapper;
+import com.nnk.springboot.services.mapper.impl.BidListMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

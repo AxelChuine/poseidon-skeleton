@@ -6,7 +6,7 @@ import com.nnk.springboot.exceptions.CurvePointIsNullException;
 import com.nnk.springboot.exceptions.CurvePointNotFoundException;
 import com.nnk.springboot.exceptions.ParameterNotProvidedException;
 import com.nnk.springboot.repositories.CurvePointRepository;
-import com.nnk.springboot.services.mapper.CurvePointMapper;
+import com.nnk.springboot.services.mapper.impl.CurvePointMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

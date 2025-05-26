@@ -6,7 +6,7 @@ import com.nnk.springboot.exceptions.ParameterNotProvidedException;
 import com.nnk.springboot.exceptions.RatingListNullPointerException;
 import com.nnk.springboot.exceptions.RatingNullPointerException;
 import com.nnk.springboot.repositories.RatingRepository;
-import com.nnk.springboot.services.mapper.RatingMapper;
+import com.nnk.springboot.services.mapper.impl.RatingMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 

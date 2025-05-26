@@ -1,7 +1,8 @@
-package com.nnk.springboot.services.mapper;
+package com.nnk.springboot.services.mapper.impl;
 
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.dtos.CurvePointDto;
+import com.nnk.springboot.services.mapper.IMapper;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class CurvePointMapper {
+public class CurvePointMapper implements IMapper<CurvePoint, CurvePointDto> {
 
     public CurvePointDto toDto(final CurvePoint model) {
         if (model == null) {
