@@ -1,4 +1,4 @@
-package com.nnk.springboot.services;
+package com.nnk.springboot.services.impl;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.dtos.BidListDto;
@@ -14,6 +14,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class BidListServiceTest {
@@ -42,20 +43,28 @@ public class BidListServiceTest {
     }
 
     @Test
-    public void updateBidListShouldUpdateBidList() {
-        Mockito.when(repository.save(bid)).thenReturn(bid);
-        BidList toCompare = service.update(bid);
+    public void updateBidListShouldUpdateBidList() throws ParameterNotProvidedException {
+        Integer id = 1;
+        BidList bidList = new BidList();
+        BidListDto bidListDto = new BidListDto();
 
-        Assertions.assertThat(toCompare).isEqualTo(bid);
-        Assertions.assertThat(toCompare.toString()).isEqualTo(bid.toString());
-        Assertions.assertThat(toCompare.hashCode()).isEqualTo(bid.hashCode());
+        Mockito.when(this.repository.findById(id)).thenReturn(Optional.of(this.bid));
+        Mockito.when(this.mapper.toDto(this.bid)).thenReturn(this.bidDto);
+        Mockito.when(this.mapper.update(this.bidDto, bidListDto)).thenReturn(bidList);
+        Mockito.when(this.repository.save(bidList)).thenReturn(bidList);
+        Mockito.when(this.mapper.toDto(bidList)).thenReturn(bidListDto);
+        BidListDto toCompare = service.update(id, bidListDto);
+
+        Assertions.assertThat(toCompare).isEqualTo(bidListDto);
+        Assertions.assertThat(toCompare.toString()).isEqualTo(bidListDto.toString());
+        Assertions.assertThat(toCompare.hashCode()).isEqualTo(bidListDto.hashCode());
     }
 
     @Test
-    public void deleteBidListShouldDeleteBidList() throws ParameterNotProvidedException {
+    public void deleteByIdBidListShouldDeleteByIdBidList() throws ParameterNotProvidedException {
         this.bidDto.setId(1);
 
-        service.delete(bidDto.getId());
+        service.deleteById(bidDto.getId());
         Mockito.verify(repository, Mockito.times(1)).deleteById(bidDto.getId());
     }
 

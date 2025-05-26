@@ -3,7 +3,7 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.dtos.BidListDto;
 import com.nnk.springboot.exceptions.ParameterNotProvidedException;
-import com.nnk.springboot.services.BidListService;
+import com.nnk.springboot.services.impl.BidListService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,10 +59,10 @@ public class BidListController {
 
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidListDto bidList,
-                             BindingResult result, Model model) {
+                             BindingResult result, Model model) throws ParameterNotProvidedException {
         // TODO: check required fields, if valid call service to update Bid and return list Bid
         if (!result.hasErrors()) {
-            model.addAttribute("bid", this.service.create(bidList));
+            model.addAttribute("bid", this.service.update(id, bidList));
         }
         return "redirect:/bidList/list";
     }
@@ -70,7 +70,7 @@ public class BidListController {
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) throws ParameterNotProvidedException {
         // TODO: Find Bid by Id and delete the bid, return to Bid list
-        this.service.delete(id);
+        this.service.deleteById(id);
         return "redirect:/bidList/list";
     }
 }

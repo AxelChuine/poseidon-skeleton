@@ -1,4 +1,4 @@
-package com.nnk.springboot.services;
+package com.nnk.springboot.services.impl;
 
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.dtos.RatingDto;

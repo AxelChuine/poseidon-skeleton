@@ -5,7 +5,7 @@ import com.nnk.springboot.dtos.CurvePointDto;
 import com.nnk.springboot.exceptions.CurvePointIsNullException;
 import com.nnk.springboot.exceptions.CurvePointNotFoundException;
 import com.nnk.springboot.exceptions.ParameterNotProvidedException;
-import com.nnk.springboot.services.CurvePointService;
+import com.nnk.springboot.services.impl.CurvePointService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

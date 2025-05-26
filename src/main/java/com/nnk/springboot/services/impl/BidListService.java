@@ -1,9 +1,10 @@
-package com.nnk.springboot.services;
+package com.nnk.springboot.services.impl;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.dtos.BidListDto;
 import com.nnk.springboot.exceptions.ParameterNotProvidedException;
 import com.nnk.springboot.repositories.BidListRepository;
+import com.nnk.springboot.services.IService;
 import com.nnk.springboot.services.mapper.impl.BidListMapper;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class BidListService {
+public class BidListService implements IService<BidListDto> {
 
     private final BidListRepository repository;
 
@@ -30,11 +31,16 @@ public class BidListService {
         return this.mapper.toDto(repository.save(this.mapper.toModel(bidList)));
     }
 
-    public BidList update(final BidList bidList) {
-        return repository.save(bidList);
+    @Override
+    public BidListDto update(final Integer id, final BidListDto bidList) throws ParameterNotProvidedException {
+        if (Objects.isNull(id) || Objects.isNull(bidList)) {
+            throw new ParameterNotProvidedException("The identifier or the bid was not provided. Please, try again.");
+        }
+        Optional<BidList> optional = this.repository.findById(id);
+        return optional.map(list -> this.mapper.toDto(this.repository.save(this.mapper.update(this.mapper.toDto(list), bidList)))).orElse(null);
     }
 
-    public void delete(final Integer id) throws ParameterNotProvidedException {
+    public void deleteById(final Integer id) throws ParameterNotProvidedException {
         if (Objects.isNull(id)) {
             throw new ParameterNotProvidedException("The bid was not correctly provided. Please, try again.");
         }

@@ -1,8 +1,7 @@
-package com.nnk.springboot.services.mappers.impl;
+package com.nnk.springboot.services.mapper.impl;
 
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.dtos.RuleNameDto;
-import com.nnk.springboot.services.mapper.impl.RuleNameMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

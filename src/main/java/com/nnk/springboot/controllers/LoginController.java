@@ -1,7 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.exceptions.UserListIsEmptyException;
-import com.nnk.springboot.services.UserService;
+import com.nnk.springboot.services.impl.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

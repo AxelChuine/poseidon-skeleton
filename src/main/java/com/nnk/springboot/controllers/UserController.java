@@ -4,7 +4,7 @@ import com.nnk.springboot.domain.User;
 import com.nnk.springboot.dtos.UserDto;
 import com.nnk.springboot.exceptions.ParameterNotProvidedException;
 import com.nnk.springboot.exceptions.UserListIsEmptyException;
-import com.nnk.springboot.services.UserService;
+import com.nnk.springboot.services.impl.UserService;
 import jakarta.validation.Valid;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;

@@ -1,8 +1,7 @@
-package com.nnk.springboot.services.mappers.impl;
+package com.nnk.springboot.services.mapper.impl;
 
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.dtos.RatingDto;
-import com.nnk.springboot.services.mapper.impl.RatingMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

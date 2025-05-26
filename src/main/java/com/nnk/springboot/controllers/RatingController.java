@@ -3,7 +3,7 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.dtos.RatingDto;
 import com.nnk.springboot.exceptions.ParameterNotProvidedException;
-import com.nnk.springboot.services.RatingService;
+import com.nnk.springboot.services.impl.RatingService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
