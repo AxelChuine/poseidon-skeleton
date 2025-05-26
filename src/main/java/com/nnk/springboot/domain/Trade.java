@@ -84,4 +84,10 @@ public class Trade {
         this.account = tradeAccount;
         this.type = type;
     }
+
+    public Trade(Integer id, String account, String type) {
+        this.id = id;
+        this.account = account;
+        this.type = type;
+    }
 }

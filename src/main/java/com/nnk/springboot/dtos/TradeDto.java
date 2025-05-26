@@ -1,6 +1,6 @@
 package com.nnk.springboot.dtos;
 
-import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class TradeDto {
     private Integer id;
+
+    @NotNull
     private String account;
+
+    @NotNull
     private String type;
     private Double buyQuantity;
     private Double sellQuantity;
@@ -33,4 +37,10 @@ public class TradeDto {
     private String dealType;
     private String sourceListId;
     private String side;
+
+    public TradeDto(Integer id, String account, String type) {
+        this.id = id;
+        this.account = account;
+        this.type = type;
+    }
 }
