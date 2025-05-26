@@ -44,4 +44,17 @@ public class RatingMapper {
         model.setOrderNumber(dto.getOrderNumber());
         return model;
     }
+
+    public Rating update(final RatingDto toUpdateDto, final RatingDto rating) {
+        if (Objects.isNull(toUpdateDto) || Objects.isNull(rating)) {
+            return null;
+        }
+        Rating model = new Rating();
+        model.setId(Objects.nonNull(toUpdateDto.getId()) ? toUpdateDto.getId() : Objects.isNull(rating.getId()) ? null : rating.getId());
+        model.setMoodysRating(Objects.nonNull(rating.getMoodysRating()) ? rating.getMoodysRating() : Objects.isNull(toUpdateDto.getMoodysRating()) ? null : toUpdateDto.getMoodysRating());
+        model.setSandPRating(Objects.nonNull(rating.getSandPRating()) ? rating.getSandPRating() : Objects.isNull(toUpdateDto.getSandPRating()) ? null : toUpdateDto.getSandPRating());
+        model.setFitchRating(Objects.nonNull(rating.getFitchRating()) ? rating.getFitchRating() : Objects.isNull(toUpdateDto.getFitchRating()) ? null : toUpdateDto.getFitchRating());
+        model.setOrderNumber(Objects.nonNull(rating.getOrderNumber()) ? rating.getOrderNumber() : Objects.isNull(toUpdateDto.getOrderNumber()) ? null : toUpdateDto.getOrderNumber());
+        return model;
+    }
 }

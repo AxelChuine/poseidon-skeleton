@@ -73,4 +73,9 @@ public class RatingMapperTest {
 
         Assertions.assertThat(toCompare).isEqualTo(listDto);
     }
+
+    @Test
+    public void updateShouldReturnARatingModel() {
+        // TODO: faire le test sur la méthode update
+    }
 }

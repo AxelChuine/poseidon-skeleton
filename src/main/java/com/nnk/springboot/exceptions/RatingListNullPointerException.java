@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 public class RatingListNullPointerException extends NullPointerException {
     private String message;
-    private final HttpStatus code = HttpStatus.NO_CONTENT;
+    private final HttpStatus code = HttpStatus.NOT_FOUND;
 
     public RatingListNullPointerException() {
         super();

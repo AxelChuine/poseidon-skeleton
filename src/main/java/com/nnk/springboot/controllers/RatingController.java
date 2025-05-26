@@ -63,7 +63,7 @@ public class RatingController {
                              BindingResult result, Model model) {
         List<RatingDto> list = this.service.findAll();
         if (!result.hasErrors() && Objects.nonNull(id) && id > 0) {
-            RatingDto dto = this.service.update(rating);
+            RatingDto dto = this.service.update(id, rating);
             list.add(dto);
             model.addAttribute("ratings", list);
         }

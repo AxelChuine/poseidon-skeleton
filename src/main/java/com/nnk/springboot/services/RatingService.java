@@ -1,5 +1,6 @@
 package com.nnk.springboot.services;
 
+import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.dtos.RatingDto;
 import com.nnk.springboot.exceptions.ParameterNotProvidedException;
 import com.nnk.springboot.exceptions.RatingListNullPointerException;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class RatingService {
@@ -49,11 +51,16 @@ public class RatingService {
         return this.mapper.toDto(this.repository.findById(id).orElse(null));
     }
 
-    public RatingDto update(RatingDto rating) {
+    public RatingDto update(final Integer id, final RatingDto rating) {
         if (Objects.isNull(rating)) {
             throw new RatingNullPointerException();
         }
-        return this.mapper.toDto(this.repository.save(this.mapper.toModel(rating)));
+        Optional<Rating> optional = this.repository.findById(id);
+        if (optional.isPresent()) {
+            RatingDto dto = this.mapper.toDto(optional.get());
+            return this.mapper.toDto(this.repository.save(this.mapper.update(dto, rating)));
+        }
+        return null;
     }
 
     public void deleteById(Integer id) throws ParameterNotProvidedException {
