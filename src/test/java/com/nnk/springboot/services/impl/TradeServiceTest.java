@@ -13,9 +13,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class TradeServiceTest {
@@ -74,6 +76,16 @@ public class TradeServiceTest {
     }
 
     @Test
+    public void findByIdShouldThrowParameterNotProvidedException () {
+        String message = "The identifier was not provided. Please, try again.";
+
+        ParameterNotProvidedException exception = org.junit.jupiter.api.Assertions.assertThrows(ParameterNotProvidedException.class, () -> this.service.findById(null), message);
+
+        Assertions.assertThat(exception.getMessage()).isEqualTo(message);
+        Assertions.assertThat(exception.getCode()).isEqualTo(HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @Test
     public void updateShouldReturnADto () throws ParameterNotProvidedException {
         String type = "new type";
         Trade updated = new Trade(
@@ -87,15 +99,26 @@ public class TradeServiceTest {
                 type
         );
 
-        Mockito.when(this.repository.findById(this.id)).thenReturn(java.util.Optional.of(this.model));
+        Mockito.when(this.repository.findById(this.id)).thenReturn(Optional.of(this.model));
         Mockito.when(this.mapper.toDto(this.model)).thenReturn(this.dto);
         Mockito.when(this.mapper.update(this.dto, updatedDto)).thenReturn(updated);
+        Mockito.when(this.repository.save(updated)).thenReturn(updated);
         Mockito.when(this.mapper.toDto(updated)).thenReturn(updatedDto);
         TradeDto toCompare = this.service.update(this.id, updatedDto);
 
         Assertions.assertThat(toCompare).isEqualTo(updatedDto);
         Assertions.assertThat(toCompare.toString()).isEqualTo(updatedDto.toString());
         Assertions.assertThat(toCompare.hashCode()).isEqualTo(updatedDto.hashCode());
+    }
+
+    @Test
+    public void updateShouldThrowParameterNotProvidedException () {
+        String message = "The identifier or the trade was not provided. Please, try again.";
+
+        ParameterNotProvidedException exception = org.junit.jupiter.api.Assertions.assertThrows(ParameterNotProvidedException.class, () -> this.service.update(null, null), message);
+
+        Assertions.assertThat(exception.getMessage()).isEqualTo(message);
+        Assertions.assertThat(exception.getCode()).isEqualTo(HttpStatus.NOT_ACCEPTABLE);
     }
 
     @Test
@@ -111,8 +134,28 @@ public class TradeServiceTest {
     }
 
     @Test
+    public void createShouldThrowParameterNotProvidedException () {
+        String message = "The trade was not provided. Please, try again.";
+
+        ParameterNotProvidedException exception = org.junit.jupiter.api.Assertions.assertThrows(ParameterNotProvidedException.class, () -> this.service.create(null), message);
+
+        Assertions.assertThat(exception.getMessage()).isEqualTo(message);
+        Assertions.assertThat(exception.getCode()).isEqualTo(HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @Test
     public void deleteByIdShouldDeleteById () throws ParameterNotProvidedException {
         this.service.deleteById(this.id);
         Mockito.verify(this.repository, Mockito.times(1)).deleteById(this.id);
+    }
+
+    @Test
+    public void deleteByIdShouldThrowParameterNotProvidedException () {
+        String message = "The identifier was not provided. Please, try again.";
+
+        ParameterNotProvidedException exception = org.junit.jupiter.api.Assertions.assertThrows(ParameterNotProvidedException.class, () -> this.service.deleteById(null), message);
+
+        Assertions.assertThat(exception.getMessage()).isEqualTo(message);
+        Assertions.assertThat(exception.getCode()).isEqualTo(HttpStatus.NOT_ACCEPTABLE);
     }
 }

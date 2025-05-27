@@ -71,9 +71,15 @@ public class TradeMapper implements IMapper<Trade, TradeDto> {
         return model;
     }
 
+    /**
+     * Prend en paramètres un tradeDto à mettre à jour et un tradeDto mis à jour.
+     * @param dtoToUpdate
+     * @param dto
+     * @return a model
+     */
     @Override
     public Trade update(TradeDto dtoToUpdate, TradeDto dto) {
-        if (Objects.isNull(dto) || Objects.isNull(dtoToUpdate) ) {
+        if (Objects.isNull(dto) || Objects.isNull(dtoToUpdate)) {
             return null;
         }
         Trade model = new Trade();
