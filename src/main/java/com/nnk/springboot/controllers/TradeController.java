@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Controller
@@ -57,7 +59,7 @@ public class TradeController {
     @PostMapping("/trade/update/{id}")
     public String updateTrade(@PathVariable("id") Integer id, @Valid TradeDto trade,
                              BindingResult result, Model model) throws ParameterNotProvidedException {
-        List<TradeDto> list = this.service.findAll();
+        Set<TradeDto> list = new HashSet<>(this.service.findAll());
         if (!result.hasErrors() && Objects.nonNull(id)) {
             list.add(this.service.update(id, trade));
             model.addAttribute("trades", list);
