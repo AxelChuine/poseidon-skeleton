@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
 import java.util.Objects;
 
 
@@ -41,12 +40,9 @@ public class CurvePointController {
 
     @PostMapping("/curvePoint/validate")
     public String validate(@Valid CurvePointDto curvePoint, BindingResult result, Model model) throws CurvePointNotFoundException, CurvePointIsNullException {
-        // TODO: check data valid and save to db, after saving return Curve list
-        List<CurvePointDto> list = this.service.findAll();
         if (!result.hasErrors()) {
             CurvePointDto dto = this.service.create(curvePoint);
-            list.add(dto);
-            model.addAttribute("curvePoints", list);
+            model.addAttribute("curvePoints", this.service.findAll());
         }
         return "curvePoint/add";
     }
@@ -60,12 +56,10 @@ public class CurvePointController {
     @PostMapping("/curvePoint/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid CurvePointDto curvePoint,
                              BindingResult result, Model model) throws CurvePointNotFoundException, ParameterNotProvidedException {
-        // TODO: check required fields, if valid call service to update Curve and return Curve list
-        List<CurvePointDto> list = this.service.findAll();
         if (!result.hasErrors() && Objects.nonNull(id)) {
-            list.add(this.service.update(id, curvePoint));
+            this.service.update(id, curvePoint);
         }
-        model.addAttribute("curvePoints", list);
+        model.addAttribute("curvePoints", this.service.findAll());
         return "redirect:/curvePoint/list";
     }
 
@@ -73,8 +67,7 @@ public class CurvePointController {
     public String deleteBid(@PathVariable("id") Integer id, Model model) throws ParameterNotProvidedException, CurvePointNotFoundException {
         // TODO: Find Curve by Id and delete the Curve, return to Curve list
         this.service.deleteById(id);
-        List<CurvePointDto> list = this.service.findAll();
-        model.addAttribute("curvePoints", list);
+        model.addAttribute("curvePoints", this.service.findAll());
         return "redirect:/curvePoint/list";
     }
 }

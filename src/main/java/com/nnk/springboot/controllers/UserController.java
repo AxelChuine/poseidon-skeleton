@@ -60,7 +60,6 @@ public class UserController {
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         UserDto user = service.findById(id);
-        user.setPassword("");
         model.addAttribute("user", user);
         return "user/update";
     }

@@ -38,7 +38,6 @@ public class RatingController {
 
     @PostMapping("/rating/validate")
     public String validate(@Valid RatingDto rating, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Rating list
         List<RatingDto> list = this.service.findAll();
         if (!result.hasErrors()) {
             RatingDto dto = this.service.create(rating);
@@ -50,7 +49,6 @@ public class RatingController {
 
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) throws ParameterNotProvidedException {
-        // TODO: get Rating by Id and to model then show to the form
         if (Objects.nonNull(id) && id > 0) {
             RatingDto dto = this.service.findById(id);
             model.addAttribute("rating", dto);
@@ -61,21 +59,17 @@ public class RatingController {
     @PostMapping("/rating/update/{id}")
     public String updateRating(@PathVariable("id") Integer id, @Valid RatingDto rating,
                              BindingResult result, Model model) {
-        List<RatingDto> list = this.service.findAll();
         if (!result.hasErrors() && Objects.nonNull(id) && id > 0) {
             RatingDto dto = this.service.update(id, rating);
-            list.add(dto);
-            model.addAttribute("ratings", list);
+            model.addAttribute("ratings", this.service.findAll());
         }
         return "redirect:/rating/list";
     }
 
     @GetMapping("/rating/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, Model model) throws ParameterNotProvidedException {
-        // TODO: Find Rating by Id and delete the Rating, return to Rating list
         this.service.deleteById(id);
-        List<RatingDto> list = this.service.findAll();
-        model.addAttribute("ratings", list);
+        model.addAttribute("ratings", this.service.findAll());
         return "redirect:/rating/list";
     }
 }

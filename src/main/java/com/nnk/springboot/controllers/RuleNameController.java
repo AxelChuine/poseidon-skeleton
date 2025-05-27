@@ -13,10 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 
 @Controller
 public class RuleNameController {
@@ -39,11 +35,10 @@ public class RuleNameController {
 
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleNameDto ruleName, BindingResult result, Model model) throws ParameterNotProvidedException {
-        List<RuleNameDto> list = this.service.findAll();
         if (!result.hasErrors()) {
-            list.add(this.service.create(ruleName));
-            model.addAttribute("ruleNames", list);
+            this.service.create(ruleName);
         }
+        model.addAttribute("ruleNames", this.service.findAll());
         return "ruleName/add";
     }
 
@@ -56,11 +51,10 @@ public class RuleNameController {
     @PostMapping("/ruleName/update/{id}")
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleNameDto ruleName,
                              BindingResult result, Model model) throws ParameterNotProvidedException {
-        Set<RuleNameDto> list = new HashSet<>(this.service.findAll());
         if (!result.hasErrors()) {
-            list.add(this.service.update(id, ruleName));
-            model.addAttribute("ruleNames", list);
+            this.service.update(id, ruleName);
         }
+        model.addAttribute("ruleNames", this.service.findAll());
         return "redirect:/ruleName/list";
     }
 
