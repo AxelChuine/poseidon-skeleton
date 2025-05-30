@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -23,16 +23,16 @@ public class TradeDto {
     private Double sellQuantity;
     private Double buyPrice;
     private Double sellPrice;
-    private Instant tradeDate;
+    private Timestamp tradeDate;
     private String security;
     private String status;
     private String trader;
     private String benchmark;
     private String book;
     private String creationName;
-    private LocalDateTime creationDate;
+    private Timestamp creationDate;
     private String revisionName;
-    private Instant revisionDate;
+    private Timestamp revisionDate;
     private String dealName;
     private String dealType;
     private String sourceListId;

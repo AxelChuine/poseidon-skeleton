@@ -84,7 +84,7 @@ public class CurvePointMapperTest {
     }
 
     @Test
-    public void tuUpdateShouldReturnModel() {
+    public void toUpdateShouldReturnModel() {
         Double term = 1D;
         CurvePointDto dtoToUpdate = new CurvePointDto(
                 id,

@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
+import java.sql.Timestamp;
 
 
 @Entity
@@ -24,10 +24,10 @@ public class CurvePoint {
     private Integer id;
 
     @Column(name = "CurveId")
-    private Byte curveId;
+    private Integer curveId;
 
     @Column(name = "asOfDate")
-    private Instant asOfDate;
+    private Timestamp asOfDate;
 
     @Column(name = "term")
     private Double term;
@@ -36,7 +36,7 @@ public class CurvePoint {
     private Double value;
 
     @Column(name = "creation_date")
-    private Instant creationDate;
+    private Timestamp creationDate;
 
     public CurvePoint(Integer id, double term, double value) {
         this.id = id;

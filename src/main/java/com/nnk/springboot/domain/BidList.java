@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "bid_list")
@@ -51,7 +51,7 @@ public class BidList {
     private String benchmark;
 
     @Column(name = "bid_list_date")
-    private Instant bidListDate;
+    private Timestamp bidListDate;
 
     @Size(max = 125)
     @Column(name = "commentary", length = 125)
@@ -78,14 +78,14 @@ public class BidList {
     private String creationName;
 
     @Column(name = "creation_date")
-    private Instant creationDate;
+    private Timestamp creationDate;
 
     @Size(max = 125)
     @Column(name = "revision_name", length = 125)
     private String revisionName;
 
     @Column(name = "revision_date")
-    private Instant revisionDate;
+    private Timestamp revisionDate;
 
     @Size(max = 125)
     @Column(name = "deal_name", length = 125)

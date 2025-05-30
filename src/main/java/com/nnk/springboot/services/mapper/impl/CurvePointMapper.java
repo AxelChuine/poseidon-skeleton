@@ -55,14 +55,14 @@ public class CurvePointMapper implements IMapper<CurvePoint, CurvePointDto> {
         if (Objects.isNull(toUpdate) || Objects.isNull(update)) {
             return null;
         }
-        Instant date = Instant.now();
+        Timestamp date = Timestamp.from(Instant.now());
         CurvePoint model = new CurvePoint();
         model.setId(Objects.nonNull(toUpdate.getId()) ? toUpdate.getId() : Objects.isNull(update.getId()) ? null : update.getId());
         model.setCurveId(Objects.nonNull(update.getCurveId()) ? update.getCurveId() : Objects.isNull(toUpdate.getCurveId()) ? null : toUpdate.getCurveId());
-        model.setAsOfDate(Objects.nonNull(update.getAsOfDate()) ? update.getAsOfDate() : Objects.isNull(toUpdate.getAsOfDate()) ? Timestamp.from(date) : toUpdate.getAsOfDate());
+        model.setAsOfDate(Objects.nonNull(update.getAsOfDate()) ? update.getAsOfDate() : Objects.isNull(toUpdate.getAsOfDate()) ? date : toUpdate.getAsOfDate());
         model.setTerm(Objects.nonNull(update.getTerm()) ? update.getTerm() : Objects.isNull(toUpdate.getTerm()) ? null : toUpdate.getTerm());
         model.setValue(Objects.nonNull(update.getValue()) ? update.getValue() : Objects.isNull(toUpdate.getValue()) ? null : toUpdate.getValue());
-        model.setCreationDate(Objects.nonNull(update.getCreationDate()) ? update.getCreationDate() : Objects.isNull(toUpdate.getCreationDate()) ? Timestamp.from(date) : toUpdate.getCreationDate());
+        model.setCreationDate(Objects.nonNull(update.getCreationDate()) ? update.getCreationDate() : Objects.isNull(toUpdate.getCreationDate()) ? date : toUpdate.getCreationDate());
         return model;
     }
 }
