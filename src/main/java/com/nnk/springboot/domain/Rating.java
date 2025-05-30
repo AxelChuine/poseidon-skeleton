@@ -1,33 +1,37 @@
 package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name = "Rating")
+@Table(name = "rating")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Rating {
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "moodysRating", length = 125)
+    @Size(max = 125)
+    @Column(name = "moodys_rating", length = 125)
     private String moodysRating;
 
+    @Size(max = 125)
     @Column(name = "sandPRating", length = 125)
     private String sandPRating;
 
-    @Column(name = "fitchRating", length = 125)
+    @Size(max = 125)
+    @Column(name = "fitch_rating", length = 125)
     private String fitchRating;
 
-    @Column(name = "orderNumber")
+    @Column(name = "order_number")
     private Integer orderNumber;
 
     public Rating(String moodysRating, String sandPRating, String fitchRating, int i) {

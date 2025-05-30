@@ -1,12 +1,16 @@
 package com.nnk.springboot.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 
 
 @Entity
@@ -15,68 +19,84 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Trade {
+
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "TradeId", nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
 
+    @Size(max = 30)
+    @NotNull
     @Column(name = "account", nullable = false, length = 30)
     private String account;
 
+    @Size(max = 30)
+    @NotNull
     @Column(name = "type", nullable = false, length = 30)
     private String type;
 
-    @Column(name = "buyQuantity")
+    @Column(name = "buy_quantity")
     private Double buyQuantity;
 
-    @Column(name = "sellQuantity")
+    @Column(name = "sell_quantity")
     private Double sellQuantity;
 
-    @Column(name = "buyPrice")
+    @Column(name = "buy_price")
     private Double buyPrice;
 
-    @Column(name = "sellPrice")
+    @Column(name = "sell_price")
     private Double sellPrice;
 
-    @Column(name = "tradeDate")
+    @Column(name = "trade_date")
     private Instant tradeDate;
 
+    @Size(max = 125)
     @Column(name = "security", length = 125)
     private String security;
 
+    @Size(max = 10)
     @Column(name = "status", length = 10)
     private String status;
 
+    @Size(max = 125)
     @Column(name = "trader", length = 125)
     private String trader;
 
+    @Size(max = 125)
     @Column(name = "benchmark", length = 125)
     private String benchmark;
 
+    @Size(max = 125)
     @Column(name = "book", length = 125)
     private String book;
 
-    @Column(name = "creationName", length = 125)
+    @Size(max = 125)
+    @Column(name = "creation_name", length = 125)
     private String creationName;
 
-    @Column(name = "creationDate")
-    private LocalDateTime creationDate;
+    @Column(name = "creation_date")
+    private Instant creationDate;
 
-    @Column(name = "revisionName", length = 125)
+    @Size(max = 125)
+    @Column(name = "revision_name", length = 125)
     private String revisionName;
 
-    @Column(name = "revisionDate")
+    @Column(name = "revision_date")
     private Instant revisionDate;
 
-    @Column(name = "dealName", length = 125)
+    @Size(max = 125)
+    @Column(name = "deal_name", length = 125)
     private String dealName;
 
-    @Column(name = "dealType", length = 125)
+    @Size(max = 125)
+    @Column(name = "deal_type", length = 125)
     private String dealType;
 
-    @Column(name = "sourceListId", length = 125)
+    @Size(max = 125)
+    @Column(name = "source_list_id", length = 125)
     private String sourceListId;
 
+    @Size(max = 125)
     @Column(name = "side", length = 125)
     private String side;
 

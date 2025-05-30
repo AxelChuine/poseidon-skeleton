@@ -1,15 +1,19 @@
 package com.nnk.springboot.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Entity
-@Table(name = "BidList")
+@Table(name = "bid_list")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,20 +21,23 @@ public class BidList {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "bid_list_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
 
+    @Size(max = 30)
+    @NotNull
     @Column(name = "account", nullable = false, length = 30)
     private String account;
 
+    @Size(max = 30)
+    @NotNull
     @Column(name = "type", nullable = false, length = 30)
     private String type;
 
-    @Column(name = "bidQuantity")
+    @Column(name = "bid_quantity")
     private Double bidQuantity;
 
-    @Column(name = "askQuantity")
+    @Column(name = "ask_quantity")
     private Double askQuantity;
 
     @Column(name = "bid")
@@ -39,48 +46,60 @@ public class BidList {
     @Column(name = "ask")
     private Double ask;
 
+    @Size(max = 125)
     @Column(name = "benchmark", length = 125)
     private String benchmark;
 
-    @Column(name = "bidListDate")
-    private Timestamp bidListDate;
+    @Column(name = "bid_list_date")
+    private Instant bidListDate;
 
+    @Size(max = 125)
     @Column(name = "commentary", length = 125)
     private String commentary;
 
+    @Size(max = 125)
     @Column(name = "security", length = 125)
     private String security;
 
+    @Size(max = 10)
     @Column(name = "status", length = 10)
     private String status;
 
+    @Size(max = 125)
     @Column(name = "trader", length = 125)
     private String trader;
 
+    @Size(max = 125)
     @Column(name = "book", length = 125)
     private String book;
 
-    @Column(name = "creationName", length = 125)
+    @Size(max = 125)
+    @Column(name = "creation_name", length = 125)
     private String creationName;
 
-    @Column(name = "creationDate")
-    private Timestamp creationDate;
+    @Column(name = "creation_date")
+    private Instant creationDate;
 
-    @Column(name = "revisionName", length = 125)
+    @Size(max = 125)
+    @Column(name = "revision_name", length = 125)
     private String revisionName;
 
-    @Column(name = "revisionDate")
-    private Timestamp revisionDate;
+    @Column(name = "revision_date")
+    private Instant revisionDate;
 
-    @Column(name = "dealName", length = 125)
+    @Size(max = 125)
+    @Column(name = "deal_name", length = 125)
     private String dealName;
 
-    @Column(name = "dealType", length = 125)
+    @Size(max = 125)
+    @Column(name = "deal_type", length = 125)
     private String dealType;
 
-    @Column(name = "sourceListId", length = 125)
+    @Size(max = 125)
+    @Column(name = "source_list_id", length = 125)
     private String sourceListId;
 
+    @Size(max = 125)
     @Column(name = "side", length = 125)
     private String side;
 

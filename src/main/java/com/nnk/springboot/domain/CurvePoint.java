@@ -1,30 +1,33 @@
 package com.nnk.springboot.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.time.Instant;
 
 
 @Entity
-@Table(name = "CurvePoint")
+@Table(name = "curve_point")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class CurvePoint {
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
 
     @Column(name = "CurveId")
-    private Integer curveId;
+    private Byte curveId;
 
     @Column(name = "asOfDate")
-    private Timestamp asOfDate;
+    private Instant asOfDate;
 
     @Column(name = "term")
     private Double term;
@@ -32,11 +35,11 @@ public class CurvePoint {
     @Column(name = "value")
     private Double value;
 
-    @Column(name = "creationDate")
-    private Timestamp creationDate;
+    @Column(name = "creation_date")
+    private Instant creationDate;
 
-    public CurvePoint(int curveId, double term, double value) {
-        this.curveId = curveId;
+    public CurvePoint(Integer id, double term, double value) {
+        this.id = id;
         this.term = term;
         this.value = value;
     }

@@ -1,6 +1,5 @@
 package com.nnk.springboot.repository;
 
-import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 import org.junit.jupiter.api.Assertions;
@@ -40,5 +39,12 @@ public class UserTest {
         repository.delete(user);
         Optional<User> optional = repository.findById(id);
         Assertions.assertFalse(optional.isPresent());
+    }
+
+    @Test
+    public void findAllTest() {
+        List<User> listResult = repository.findAll();
+
+        Assertions.assertFalse(listResult.isEmpty());
     }
 }
