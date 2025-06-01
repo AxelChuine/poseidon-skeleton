@@ -55,17 +55,18 @@ public class CurvePointController {
 
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) throws ParameterNotProvidedException {
-        model.addAttribute("curve", this.service.findById(id));
+        model.addAttribute("curvePoint", this.service.findById(id));
         return "curvePoint/update";
     }
 
     @PostMapping("/curvePoint/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid CurvePointDto curvePoint,
                              BindingResult result, Model model) throws CurvePointNotFoundException, ParameterNotProvidedException {
+        CurvePointDto dto = null;
         if (!result.hasErrors() && Objects.nonNull(id)) {
-            this.service.update(id, curvePoint);
+            dto = this.service.update(id, curvePoint);
         }
-        model.addAttribute("curvePoints", this.service.findAll());
+        model.addAttribute("curvePoint", dto);
         return "redirect:/curvePoint/list";
     }
 
