@@ -86,6 +86,31 @@ public class BidListMapper implements IMapper<BidList, BidListDto> {
 
     @Override
     public BidList update(BidListDto dtoToUpdate, BidListDto dto) {
-        return null;
+        if (Objects.isNull(dtoToUpdate) || Objects.isNull(dto)) {
+            return null;
+        }
+        BidList model = new BidList();
+        model.setId(dtoToUpdate.getId());
+        model.setAccount(Objects.isNull(dto.getAccount()) ? Objects.isNull(dtoToUpdate.getAccount()) ? null : dtoToUpdate.getAccount() : dto.getAccount());
+        model.setType(Objects.isNull(dto.getType()) ? Objects.isNull(dtoToUpdate.getType()) ? null : dtoToUpdate.getType() : dto.getType());
+        model.setBidQuantity(Objects.isNull(dto.getBidQuantity()) ? Objects.isNull(dtoToUpdate.getBidQuantity()) ? null : dtoToUpdate.getBidQuantity() : dto.getBidQuantity());
+        model.setBid(Objects.isNull(dto.getBid()) ? Objects.isNull(dtoToUpdate.getBid()) ? null : dtoToUpdate.getBid() : dto.getBid());
+        model.setAsk(Objects.isNull(dto.getAsk()) ? Objects.isNull(dtoToUpdate.getAsk()) ? null : dtoToUpdate.getAsk() : dto.getAsk());
+        model.setBenchmark(Objects.isNull(dto.getBenchmark()) ? Objects.isNull(dtoToUpdate.getBenchmark()) ? null : dtoToUpdate.getBenchmark() : dto.getBenchmark());
+        model.setBidListDate(Objects.isNull(dto.getBidListDate()) ? Objects.isNull(dtoToUpdate.getBidListDate()) ? null : dtoToUpdate.getBidListDate() : dto.getBidListDate());
+        model.setCommentary(Objects.isNull(dto.getCommentary()) ? Objects.isNull(dtoToUpdate.getCommentary()) ? null : dtoToUpdate.getCommentary() : dto.getCommentary());
+        model.setSecurity(Objects.isNull(dto.getSecurity()) ? Objects.isNull(dtoToUpdate.getSecurity()) ? null : dtoToUpdate.getSecurity() : dto.getSecurity());
+        model.setStatus(Objects.isNull(dto.getStatus()) ? Objects.isNull(dtoToUpdate.getStatus()) ? null : dtoToUpdate.getStatus() : dto.getStatus());
+        model.setTrader(Objects.isNull(dto.getTrader()) ? Objects.isNull(dtoToUpdate.getTrader()) ? null : dtoToUpdate.getTrader() : dto.getTrader());
+        model.setBook(Objects.isNull(dto.getBook()) ? Objects.isNull(dtoToUpdate.getBook()) ? null : dtoToUpdate.getBook() : dto.getBook());
+        model.setCreationName(Objects.isNull(dto.getCreationName()) ? Objects.isNull(dtoToUpdate.getCreationName()) ? null : dtoToUpdate.getCreationName() : dto.getCreationName());
+        model.setCreationDate(Objects.isNull(dto.getCreationDate()) ? Objects.isNull(dtoToUpdate.getCreationDate()) ? null : dtoToUpdate.getCreationDate() : dto.getCreationDate());
+        model.setRevisionName(Objects.isNull(dto.getRevisionName()) ? Objects.isNull(dtoToUpdate.getRevisionName()) ? null : dtoToUpdate.getRevisionName() : dto.getRevisionName());
+        model.setRevisionDate(Objects.isNull(dto.getRevisionDate()) ? Objects.isNull(dtoToUpdate.getRevisionDate()) ? null : dtoToUpdate.getRevisionDate() : dto.getRevisionDate());
+        model.setDealName(Objects.isNull(dto.getDealName()) ? Objects.isNull(dtoToUpdate.getDealName()) ? null : dtoToUpdate.getDealName() : dto.getDealName());
+        model.setDealType(Objects.isNull(dto.getDealType()) ? Objects.isNull(dtoToUpdate.getDealType()) ? null : dtoToUpdate.getDealType() : dto.getDealType());
+        model.setSourceListId(Objects.isNull(dto.getSourceListId()) ? Objects.isNull(dtoToUpdate.getSourceListId()) ? null : dtoToUpdate.getSourceListId() : dto.getSourceListId());
+        model.setSide(Objects.isNull(dto.getSide()) ? Objects.isNull(dtoToUpdate.getSide()) ? null : dtoToUpdate.getSide() : dto.getSide());
+        return model;
     }
 }

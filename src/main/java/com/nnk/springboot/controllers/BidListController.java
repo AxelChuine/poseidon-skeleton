@@ -52,17 +52,18 @@ public class BidListController {
 
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        model.addAttribute("bid", this.service.findById(id));
+        model.addAttribute("bidList", this.service.findById(id));
         return "bidList/update";
     }
 
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidListDto bidList,
                              BindingResult result, Model model) throws ParameterNotProvidedException {
+        BidListDto dto = new BidListDto();
         if (!result.hasErrors()) {
-            this.service.update(id, bidList);
+            dto = this.service.update(id, bidList);
         }
-        model.addAttribute("bid", this.service.findAll());
+        model.addAttribute("bidList", dto);
         return "redirect:/bidList/list";
     }
 
