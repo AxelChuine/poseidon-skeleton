@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Controller
 public class BidListController {
@@ -24,6 +27,10 @@ public class BidListController {
 
     @RequestMapping("/bidList/list")
     public String home(Model model) {
+        List<BidListDto> list = service.findAll();
+        if (list.isEmpty()) {
+            model.addAttribute("bids", new ArrayList<>());
+        }
         model.addAttribute("bids", service.findAll());
         return "bidList/list";
     }
@@ -35,10 +42,11 @@ public class BidListController {
 
     @PostMapping("/bidList/validate")
     public String validate(@Valid BidListDto bid, BindingResult result, Model model) {
+        BidListDto dto = new BidListDto();
         if (!result.hasErrors()) {
-            this.service.create(bid);
+            dto = this.service.create(bid);
         }
-        model.addAttribute("bids", this.service.findAll());
+        model.addAttribute("bidList", dto);
         return "bidList/add";
     }
 
