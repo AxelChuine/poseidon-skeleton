@@ -27,7 +27,7 @@ public class CurvePointService {
     public List<CurvePointDto> findAll() throws CurvePointNotFoundException {
         List<CurvePointDto> list = this.mapper.toDtoList(this.repository.findAll());
         if (Objects.isNull(list) || list.isEmpty()) {
-            throw new CurvePointNotFoundException();
+            return null;
         }
         return list;
     }

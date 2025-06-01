@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -29,7 +31,11 @@ public class CurvePointController {
 
     @RequestMapping("/curvePoint/list")
     public String home(Model model) throws CurvePointNotFoundException {
-        model.addAttribute("curvePoints", service.findAll());
+        List<CurvePointDto> list = this.service.findAll();
+        model.addAttribute("curvePoints", list);
+        if (Objects.isNull(list) || list.isEmpty()) {
+            model.addAttribute("curvePoints", new ArrayList<>());
+        }
         return "curvePoint/list";
     }
 
@@ -42,7 +48,7 @@ public class CurvePointController {
     public String validate(@Valid CurvePointDto curvePoint, BindingResult result, Model model) throws CurvePointNotFoundException, CurvePointIsNullException {
         if (!result.hasErrors()) {
             CurvePointDto dto = this.service.create(curvePoint);
-            model.addAttribute("curvePoints", this.service.findAll());
+            model.addAttribute("curvePoint", dto);
         }
         return "curvePoint/add";
     }
