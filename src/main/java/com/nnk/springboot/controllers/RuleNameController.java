@@ -35,26 +35,28 @@ public class RuleNameController {
 
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleNameDto ruleName, BindingResult result, Model model) throws ParameterNotProvidedException {
+        RuleNameDto dto = new RuleNameDto();
         if (!result.hasErrors()) {
-            this.service.create(ruleName);
+            dto = this.service.create(ruleName);
         }
-        model.addAttribute("ruleNames", this.service.findAll());
+        model.addAttribute("ruleName", dto);
         return "ruleName/add";
     }
 
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) throws ParameterNotProvidedException {
-        model.addAttribute("rulename", this.service.findById(id));
+        model.addAttribute("ruleName", this.service.findById(id));
         return "ruleName/update";
     }
 
     @PostMapping("/ruleName/update/{id}")
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleNameDto ruleName,
                              BindingResult result, Model model) throws ParameterNotProvidedException {
+        RuleNameDto dto = new RuleNameDto();
         if (!result.hasErrors()) {
-            this.service.update(id, ruleName);
+            dto = this.service.update(id, ruleName);
         }
-        model.addAttribute("ruleNames", this.service.findAll());
+        model.addAttribute("ruleName", dto);
         return "redirect:/ruleName/list";
     }
 
