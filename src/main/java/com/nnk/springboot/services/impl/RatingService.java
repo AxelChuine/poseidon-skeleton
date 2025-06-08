@@ -3,7 +3,6 @@ package com.nnk.springboot.services.impl;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.dtos.RatingDto;
 import com.nnk.springboot.exceptions.ParameterNotProvidedException;
-import com.nnk.springboot.exceptions.RatingListNullPointerException;
 import com.nnk.springboot.exceptions.RatingNullPointerException;
 import com.nnk.springboot.repositories.RatingRepository;
 import com.nnk.springboot.services.mapper.impl.RatingMapper;
@@ -28,7 +27,7 @@ public class RatingService {
     public List<RatingDto> findAll() {
         List<RatingDto> list = this.mapper.toDtoList(this.repository.findAll());
         if (Objects.isNull(list) || list.isEmpty()) {
-            throw new RatingListNullPointerException();
+            return null;
         }
         return list;
     }

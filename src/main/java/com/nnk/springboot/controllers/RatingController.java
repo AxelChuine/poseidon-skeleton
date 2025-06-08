@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,7 +28,11 @@ public class RatingController {
 
     @RequestMapping("/rating/list")
     public String home(Model model) {
-        model.addAttribute("ratings", service.findAll());
+        List<RatingDto> ratings = service.findAll();
+        model.addAttribute("ratings", ratings);
+        if (Objects.isNull(ratings) || ratings.isEmpty()) {
+            model.addAttribute("ratings", new ArrayList<>());
+        }
         return "rating/list";
     }
 
@@ -38,11 +43,9 @@ public class RatingController {
 
     @PostMapping("/rating/validate")
     public String validate(@Valid RatingDto rating, BindingResult result, Model model) {
-        List<RatingDto> list = this.service.findAll();
         if (!result.hasErrors()) {
             RatingDto dto = this.service.create(rating);
-            list.add(dto);
-            model.addAttribute("ratings", list);
+            model.addAttribute("rating", dto);
         }
         return "rating/add";
     }
