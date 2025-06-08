@@ -29,9 +29,9 @@ public class BidListController {
     public String home(Model model) {
         List<BidListDto> list = service.findAll();
         if (list.isEmpty()) {
-            model.addAttribute("bids", new ArrayList<>());
+            model.addAttribute("bidLists", new ArrayList<>());
         }
-        model.addAttribute("bids", service.findAll());
+        model.addAttribute("bidLists", service.findAll());
         return "bidList/list";
     }
 
