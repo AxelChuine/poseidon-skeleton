@@ -39,10 +39,11 @@ public class TradeController {
 
     @PostMapping("/trade/validate")
     public String validate(@Valid TradeDto trade, BindingResult result, Model model) throws ParameterNotProvidedException {
+        TradeDto dto = new TradeDto();
         if (!result.hasErrors()) {
-            this.service.create(trade);
+            dto = this.service.create(trade);
         }
-        model.addAttribute("trades", this.service.findAll());
+        model.addAttribute("trade", dto);
         return "trade/add";
     }
 
@@ -55,10 +56,11 @@ public class TradeController {
     @PostMapping("/trade/update/{id}")
     public String updateTrade(@PathVariable("id") Integer id, @Valid TradeDto trade,
                              BindingResult result, Model model) throws ParameterNotProvidedException {
+        TradeDto dto = new TradeDto();
         if (!result.hasErrors() && Objects.nonNull(id)) {
-            this.service.update(id, trade);
+            dto = this.service.update(id, trade);
         }
-        model.addAttribute("trades", this.service.findAll());
+        model.addAttribute("trade", dto);
         return "redirect:/trade/list";
     }
 
