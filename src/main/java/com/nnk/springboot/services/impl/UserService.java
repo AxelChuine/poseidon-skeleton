@@ -40,12 +40,12 @@ public class UserService {
         return this.mapper.toDto(this.repository.save(this.mapper.toModel(dto)));
     }
 
-    public UserDto save(final UserDto dto) throws ParameterNotProvidedException {
+    public UserDto save(final Integer id, final UserDto dto) throws ParameterNotProvidedException {
         if (Objects.isNull(dto)) {
             throw new ParameterNotProvidedException("Aucun utilisateur n'a été renseigné. Veuillez recommencer.");
         }
-        UserDto userFound = this.mapper.toDto(this.repository.findById(dto.getId()).orElse(null));
-        return this.mapper.toDto(this.repository.save(this.mapper.update(userFound, dto)));
+        UserDto userFound = this.mapper.toDto(this.repository.findById(id).orElse(null));
+        return this.mapper.toDto(this.repository.save(this.mapper.update(dto, userFound)));
     }
 
     public void delete(final Integer id) {
@@ -61,6 +61,6 @@ public class UserService {
     }
 
     public UserDto findById(Integer id) {
-        return null;
+        return this.mapper.toDto(this.repository.findById(id).orElse(null));
     }
 }

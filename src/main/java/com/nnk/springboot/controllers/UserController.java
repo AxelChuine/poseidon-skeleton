@@ -49,11 +49,12 @@ public class UserController {
      */
     @PostMapping("/user/validate")
     public String validate(@Valid UserDto user, BindingResult result, Model model) throws ParameterNotProvidedException, UserListIsEmptyException {
+        UserDto dto;
         if (!result.hasErrors()) {
             /*BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             user.setPassword(encoder.encode(user.getPassword()));*/
-            service.save(user);
-            model.addAttribute("users", service.findAll());
+            dto = service.create(user);
+            model.addAttribute("user", dto);
             return "redirect:/user/list";
         }
         return "user/add";
@@ -70,14 +71,14 @@ public class UserController {
     public String updateUser(@PathVariable("id") Integer id, @Valid UserDto user,
                              BindingResult result, Model model) throws ParameterNotProvidedException, UserListIsEmptyException {
         if (result.hasErrors()) {
-            return "user/update";
+            return "redirect:/user/list";
         }
 
         /*BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));*/
         user.setId(id);
-        service.save(user);
-        model.addAttribute("users", service.findAll());
+        UserDto dto = service.save(id, user);
+        model.addAttribute("user", dto);
         return "redirect:/user/list";
     }
 
