@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.dtos.UserDto;
+import com.nnk.springboot.exceptions.IncorrectPasswordException;
 import com.nnk.springboot.exceptions.ParameterNotProvidedException;
 import com.nnk.springboot.exceptions.UserListIsEmptyException;
 import com.nnk.springboot.services.impl.UserService;
@@ -48,16 +49,19 @@ public class UserController {
      * @throws UserListIsEmptyException
      */
     @PostMapping("/user/validate")
-    public String validate(@Valid UserDto user, BindingResult result, Model model) throws ParameterNotProvidedException, UserListIsEmptyException {
-        UserDto dto;
-        if (!result.hasErrors()) {
-            /*BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            user.setPassword(encoder.encode(user.getPassword()));*/
-            dto = service.create(user);
+    public String validate(@Valid UserDto user, BindingResult result, Model model) throws ParameterNotProvidedException, UserListIsEmptyException, IncorrectPasswordException {
+        try {
+            UserDto dto = null;
+            if (!result.hasErrors()) {
+                dto = service.create(user);
+            }
             model.addAttribute("user", dto);
-            return "redirect:/user/list";
+            return "redirect:/bidList/list";
+        } catch (IncorrectPasswordException e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("user", new UserDto());
+            return "user/add";
         }
-        return "user/add";
     }
 
     @GetMapping("/user/update/{id}")

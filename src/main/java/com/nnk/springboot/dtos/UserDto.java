@@ -2,6 +2,7 @@ package com.nnk.springboot.dtos;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,9 +19,13 @@ public class UserDto {
     @NotNull
     private String fullname;
 
+    @Size(min = 8)
     @Pattern(regexp = "/(.*[aA-zZ])(.*[@!%$&^£])(.*[0-9])/gm.{8,}$",
             message = "Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial.")
+    @NotNull
     private String password;
+
+    @NotNull
     private String role;
 
     public UserDto(String username, String fullName, String password) {

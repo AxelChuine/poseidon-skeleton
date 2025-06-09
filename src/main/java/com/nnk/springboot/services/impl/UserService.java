@@ -1,6 +1,7 @@
 package com.nnk.springboot.services.impl;
 
 import com.nnk.springboot.dtos.UserDto;
+import com.nnk.springboot.exceptions.IncorrectPasswordException;
 import com.nnk.springboot.exceptions.ParameterNotProvidedException;
 import com.nnk.springboot.exceptions.UserListIsEmptyException;
 import com.nnk.springboot.exceptions.UserNotFoundException;
@@ -33,11 +34,33 @@ public class UserService {
         return dto;
     }
 
-    public UserDto create(final UserDto dto) throws ParameterNotProvidedException {
+    public UserDto create(final UserDto dto) throws ParameterNotProvidedException, IncorrectPasswordException {
         if (Objects.isNull(dto) || (Objects.isNull(dto.getUsername()) || Objects.isNull(dto.getFullname()) && Objects.isNull(dto.getPassword()))) {
             throw new ParameterNotProvidedException("Le nom d'utilisateur et/ou le mot n'ont pas été renseigné ou mal. Veuillez recommencer.");
         }
+        if (dto.getPassword().length() < 8 && isPasswordCorrect(dto.getPassword())) {
+            throw new IncorrectPasswordException();
+        } else {
+            /*BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            user.setPassword(encoder.encode(user.getPassword()));*/
+        }
         return this.mapper.toDto(this.repository.save(this.mapper.toModel(dto)));
+    }
+
+    private boolean isPasswordCorrect(final String password) {
+        boolean isPasswordCorrect = false;
+        for (char c :  password.toCharArray()) {
+            if (Character.isDigit(c)) {
+                isPasswordCorrect = true;
+            }
+            if (Character.isUpperCase(c)) {
+                isPasswordCorrect = true;
+            }
+            if ((c >= 33 && c <= 47) || (c >= 58 && c <= 64) || (c >= 91 && c <= 96) || (c >= 123 && c <= 126)) {
+                isPasswordCorrect = true;
+            }
+        }
+        return isPasswordCorrect;
     }
 
     public UserDto save(final Integer id, final UserDto dto) throws ParameterNotProvidedException {
