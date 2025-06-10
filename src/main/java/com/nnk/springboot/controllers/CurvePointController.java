@@ -45,6 +45,7 @@ public class CurvePointController {
     }
 
     @PostMapping("/curvePoint/validate")
+    @Valid
     public String validate(@Valid CurvePointDto curvePoint, BindingResult result, Model model) throws CurvePointNotFoundException, CurvePointIsNullException {
         if (!result.hasErrors()) {
             CurvePointDto dto = this.service.create(curvePoint);
@@ -60,6 +61,7 @@ public class CurvePointController {
     }
 
     @PostMapping("/curvePoint/update/{id}")
+    @Valid
     public String updateBid(@PathVariable("id") Integer id, @Valid CurvePointDto curvePoint,
                              BindingResult result, Model model) throws CurvePointNotFoundException, ParameterNotProvidedException {
         CurvePointDto dto = null;

@@ -42,6 +42,7 @@ public class RatingController {
     }
 
     @PostMapping("/rating/validate")
+    @Valid
     public String validate(@Valid RatingDto rating, BindingResult result, Model model) {
         if (!result.hasErrors()) {
             RatingDto dto = this.service.create(rating);
@@ -60,6 +61,7 @@ public class RatingController {
     }
 
     @PostMapping("/rating/update/{id}")
+    @Valid
     public String updateRating(@PathVariable("id") Integer id, @Valid RatingDto rating,
                              BindingResult result, Model model) {
         if (!result.hasErrors() && Objects.nonNull(id) && id > 0) {

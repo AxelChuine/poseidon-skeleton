@@ -38,7 +38,6 @@ public class UserController {
         return "user/add";
     }
 
-
     /**
      * A la création de l'utilisateur, le mot de passe est chiffré avec BCrypt avvant d'être enregistré en BDD.
      * @param user
@@ -49,6 +48,7 @@ public class UserController {
      * @throws UserListIsEmptyException
      */
     @PostMapping("/user/validate")
+    @Valid
     public String validate(@Valid UserDto user, BindingResult result, Model model) throws ParameterNotProvidedException, UserListIsEmptyException, IncorrectPasswordException {
         try {
             UserDto dto = null;
@@ -64,6 +64,7 @@ public class UserController {
         }
     }
 
+
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         UserDto user = service.findById(id);
@@ -72,6 +73,7 @@ public class UserController {
     }
 
     @PostMapping("/user/update/{id}")
+    @Valid
     public String updateUser(@PathVariable("id") Integer id, @Valid UserDto user,
                              BindingResult result, Model model) throws ParameterNotProvidedException, UserListIsEmptyException {
         if (result.hasErrors()) {

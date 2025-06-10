@@ -38,6 +38,7 @@ public class TradeController {
     }
 
     @PostMapping("/trade/validate")
+    @Valid
     public String validate(@Valid TradeDto trade, BindingResult result, Model model) throws ParameterNotProvidedException {
         TradeDto dto = new TradeDto();
         if (!result.hasErrors()) {
@@ -54,6 +55,7 @@ public class TradeController {
     }
 
     @PostMapping("/trade/update/{id}")
+    @Valid
     public String updateTrade(@PathVariable("id") Integer id, @Valid TradeDto trade,
                              BindingResult result, Model model) throws ParameterNotProvidedException {
         TradeDto dto = new TradeDto();

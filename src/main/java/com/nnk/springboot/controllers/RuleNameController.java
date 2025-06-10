@@ -34,6 +34,7 @@ public class RuleNameController {
     }
 
     @PostMapping("/ruleName/validate")
+    @Valid
     public String validate(@Valid RuleNameDto ruleName, BindingResult result, Model model) throws ParameterNotProvidedException {
         RuleNameDto dto = new RuleNameDto();
         if (!result.hasErrors()) {
@@ -50,6 +51,7 @@ public class RuleNameController {
     }
 
     @PostMapping("/ruleName/update/{id}")
+    @Valid
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleNameDto ruleName,
                              BindingResult result, Model model) throws ParameterNotProvidedException {
         RuleNameDto dto = new RuleNameDto();
