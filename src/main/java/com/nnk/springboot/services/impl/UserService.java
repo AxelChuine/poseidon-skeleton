@@ -38,7 +38,7 @@ public class UserService {
         if (Objects.isNull(dto) || (Objects.isNull(dto.getUsername()) || Objects.isNull(dto.getFullname()) && Objects.isNull(dto.getPassword()))) {
             throw new ParameterNotProvidedException("Le nom d'utilisateur et/ou le mot n'ont pas été renseigné ou mal. Veuillez recommencer.");
         }
-        if (dto.getPassword().length() < 8 && isPasswordCorrect(dto.getPassword())) {
+        if ((dto.getPassword().length() < 8) || (isPasswordCorrect(dto.getPassword()))) {
             throw new IncorrectPasswordException();
         } else {
             /*BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -49,16 +49,26 @@ public class UserService {
 
     private boolean isPasswordCorrect(final String password) {
         boolean isPasswordCorrect = false;
+        boolean containsDigit = false;
+        boolean containsUppercase = false;
+        boolean containsSpecialCharacter = false;
+        boolean containsLowercase = false;
         for (char c :  password.toCharArray()) {
             if (Character.isDigit(c)) {
-                isPasswordCorrect = true;
+                containsDigit = true;
             }
             if (Character.isUpperCase(c)) {
-                isPasswordCorrect = true;
+                containsUppercase = true;
             }
             if ((c >= 33 && c <= 47) || (c >= 58 && c <= 64) || (c >= 91 && c <= 96) || (c >= 123 && c <= 126)) {
-                isPasswordCorrect = true;
+                containsSpecialCharacter = true;
             }
+            if (Character.isLowerCase(c)) {
+                containsLowercase = true;
+            }
+        }
+        if (containsDigit && containsUppercase && containsSpecialCharacter && containsLowercase) {
+            isPasswordCorrect = true;
         }
         return isPasswordCorrect;
     }
