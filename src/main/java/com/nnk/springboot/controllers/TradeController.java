@@ -45,7 +45,7 @@ public class TradeController {
             dto = this.service.create(trade);
         }
         model.addAttribute("trade", dto);
-        return "trade/add";
+        return "redirect:/trade/list";
     }
 
     @GetMapping("/trade/update/{id}")
