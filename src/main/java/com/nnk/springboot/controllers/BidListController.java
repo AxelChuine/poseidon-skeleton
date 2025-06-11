@@ -47,7 +47,7 @@ public class BidListController {
             dto = this.service.create(bid);
         }
         model.addAttribute("bidList", dto);
-        return "bidList/add";
+        return "redirect:/bidList/list";
     }
 
     @GetMapping("/bidList/update/{id}")
