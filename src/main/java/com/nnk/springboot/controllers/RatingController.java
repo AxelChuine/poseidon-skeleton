@@ -48,7 +48,7 @@ public class RatingController {
             RatingDto dto = this.service.create(rating);
             model.addAttribute("rating", dto);
         }
-        return "rating/add";
+        return "redirect:/rating/list";
     }
 
     @GetMapping("/rating/update/{id}")
