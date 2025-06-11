@@ -56,7 +56,7 @@ public class UserController {
                 dto = service.create(user);
             }
             model.addAttribute("user", dto);
-            return "redirect:/bidList/list";
+            return "redirect:/user/list";
         } catch (IncorrectPasswordException e) {
             model.addAttribute("error", e.getMessage());
             model.addAttribute("user", new UserDto());
