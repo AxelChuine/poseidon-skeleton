@@ -51,7 +51,7 @@ public class CurvePointController {
             CurvePointDto dto = this.service.create(curvePoint);
             model.addAttribute("curvePoint", dto);
         }
-        return "curvePoint/add";
+        return "redirect:/curvePoint/list";
     }
 
     @GetMapping("/curvePoint/update/{id}")
