@@ -1,6 +1,7 @@
 package com.nnk.springboot.services.mapper.impl;
 
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.domain.enums.Role;
 import com.nnk.springboot.dtos.UserDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +22,7 @@ public class UserMapperTest {
     private final String username = "username";
     private final String password = "password";
     private final String fullName = "fullName";
-    private final String role = "USER";
+    private final Role role = Role.USER;
 
     private User model;
     private UserDto dto;

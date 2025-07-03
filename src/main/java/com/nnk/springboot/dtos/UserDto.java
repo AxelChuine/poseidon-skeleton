@@ -1,5 +1,6 @@
 package com.nnk.springboot.dtos;
 
+import com.nnk.springboot.domain.enums.Role;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -26,7 +27,7 @@ public class UserDto {
     private String password;
 
     @NotNull
-    private String role;
+    private Role role;
 
     public UserDto(String username, String fullName, String password) {
         this.username = username;
@@ -34,7 +35,7 @@ public class UserDto {
         this.password = password;
     }
 
-    public UserDto(String username, String fullName, String password, String role) {
+    public UserDto(String username, String fullName, String password, Role role) {
         this.username = username;
         this.fullname = fullName;
         this.password = password;

@@ -1,5 +1,6 @@
 package com.nnk.springboot.domain;
 
+import com.nnk.springboot.domain.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,16 +27,17 @@ public class User {
     private String fullname;
 
     @Column(name = "role", length = 125)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public User(String fullName, String username, String password) {
         this.username = username;
         this.password = password;
         this.fullname = fullName;
-        this.role = "USER";
+        this.role = Role.USER;
     }
 
-    public User(String username, String fullName, String password, String role) {
+    public User(String username, String fullName, String password, Role role) {
         this.username = username;
         this.fullname = fullName;
         this.password = password;

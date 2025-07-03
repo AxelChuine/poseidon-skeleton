@@ -11,12 +11,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 @Service
 public class UserService {
     private final UserMapper mapper;
 
     private final UserRepository repository;
+
+    private final String PASSWORD_PATTERN =
+            "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*#?&]{8,}$";
+
+    private UserDto dto;
 
     public UserService(UserMapper mapper, UserRepository repository) {
         this.mapper = mapper;
@@ -41,36 +47,13 @@ public class UserService {
         if ((dto.getPassword().length() < 8) || (isPasswordCorrect(dto.getPassword()))) {
             throw new IncorrectPasswordException();
         } else {
-            /*BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            user.setPassword(encoder.encode(user.getPassword()));*/
+
         }
         return this.mapper.toDto(this.repository.save(this.mapper.toModel(dto)));
     }
 
     private boolean isPasswordCorrect(final String password) {
-        boolean isPasswordCorrect = false;
-        boolean containsDigit = false;
-        boolean containsUppercase = false;
-        boolean containsSpecialCharacter = false;
-        boolean containsLowercase = false;
-        for (char c :  password.toCharArray()) {
-            if (Character.isDigit(c)) {
-                containsDigit = true;
-            }
-            if (Character.isUpperCase(c)) {
-                containsUppercase = true;
-            }
-            if ((c >= 33 && c <= 47) || (c >= 58 && c <= 64) || (c >= 91 && c <= 96) || (c >= 123 && c <= 126)) {
-                containsSpecialCharacter = true;
-            }
-            if (Character.isLowerCase(c)) {
-                containsLowercase = true;
-            }
-        }
-        if (containsDigit && containsUppercase && containsSpecialCharacter && containsLowercase) {
-            isPasswordCorrect = true;
-        }
-        return isPasswordCorrect;
+        return Pattern.matches(PASSWORD_PATTERN, password);
     }
 
     public UserDto save(final Integer id, final UserDto dto) throws ParameterNotProvidedException {
@@ -95,5 +78,10 @@ public class UserService {
 
     public UserDto findById(Integer id) {
         return this.mapper.toDto(this.repository.findById(id).orElse(null));
+    }
+
+
+    public UserDto findByUsername(String name) {
+        return this.mapper.toDto(this.repository.findByUsername(name));
     }
 }

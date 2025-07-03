@@ -1,6 +1,7 @@
 package com.nnk.springboot.services.mapper.impl;
 
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.domain.enums.Role;
 import com.nnk.springboot.dtos.UserDto;
 import com.nnk.springboot.services.mapper.IMapper;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class UserMapper  implements IMapper<User, UserDto> {
         model.setUsername(dto.getUsername());
         model.setFullname(dto.getFullname());
         model.setPassword(dto.getPassword());
-        model.setRole(Objects.isNull(dto.getRole()) ? "USER" : dto.getRole());
+        model.setRole(Objects.isNull(dto.getRole()) ? Role.USER : dto.getRole());
         return model;
     }
 

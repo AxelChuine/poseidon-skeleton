@@ -1,6 +1,7 @@
 package com.nnk.springboot.services.impl;
 
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.domain.enums.Role;
 import com.nnk.springboot.dtos.UserDto;
 import com.nnk.springboot.exceptions.ParameterNotProvidedException;
 import com.nnk.springboot.exceptions.UserListIsEmptyException;
@@ -44,7 +45,7 @@ public class UserServiceTest {
 
     private final String fullName = "fullName";
 
-    private final String role = "USER";
+    private final Role role = Role.USER;
 
     private List<User> list;
 
