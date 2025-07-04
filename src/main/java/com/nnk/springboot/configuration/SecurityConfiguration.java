@@ -32,9 +32,10 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> {
+                        auth.requestMatchers("/css/*").permitAll();
                         auth.requestMatchers("/").permitAll();
                         auth.requestMatchers("/login").permitAll();
-                        auth.requestMatchers("/*.css").permitAll();
+                        auth.requestMatchers("../static/*").permitAll();
                         auth.requestMatchers("/app/login").permitAll();
                         auth.requestMatchers("/bidList/*");
                         auth.requestMatchers("/curvePoint/*");
