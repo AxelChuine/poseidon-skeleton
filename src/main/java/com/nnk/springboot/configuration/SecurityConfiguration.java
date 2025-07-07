@@ -4,7 +4,6 @@ import com.nnk.springboot.security.CustomAuthenticationSuccessHandler;
 import com.nnk.springboot.security.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -37,13 +36,9 @@ public class SecurityConfiguration {
                         auth.requestMatchers("/login").permitAll();
                         auth.requestMatchers("../static/*").permitAll();
                         auth.requestMatchers("/app/login").permitAll();
-                        auth.requestMatchers("/bidList/*");
-                        auth.requestMatchers("/curvePoint/*");
-                        auth.requestMatchers("/user/*").hasRole("ADMIN");
-                        auth.requestMatchers(HttpMethod.POST, "/rating/*");
-                        auth.requestMatchers(HttpMethod.POST, "/ruleName/*");
-                        auth.requestMatchers(HttpMethod.POST, "/trade/*")
-                            .authenticated();
+                        auth.requestMatchers("/bidList/*").authenticated();
+                        auth.requestMatchers("/curvePoint/*").authenticated();
+                        auth.requestMatchers("/user/*").hasRole("ADMIN").anyRequest().authenticated();
                     }
                 )
                 .formLogin(

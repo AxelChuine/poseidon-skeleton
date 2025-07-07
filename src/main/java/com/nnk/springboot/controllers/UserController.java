@@ -7,6 +7,7 @@ import com.nnk.springboot.exceptions.ParameterNotProvidedException;
 import com.nnk.springboot.exceptions.UserListIsEmptyException;
 import com.nnk.springboot.services.impl.UserService;
 import jakarta.validation.Valid;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -80,8 +81,8 @@ public class UserController {
             return "redirect:/user/list";
         }
 
-        /*BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setPassword(encoder.encode(user.getPassword()));*/
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
         user.setId(id);
         UserDto dto = service.save(id, user);
         model.addAttribute("user", dto);
