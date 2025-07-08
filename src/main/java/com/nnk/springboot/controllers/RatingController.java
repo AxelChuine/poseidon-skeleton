@@ -3,6 +3,7 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.dtos.RatingDto;
 import com.nnk.springboot.exceptions.ParameterNotProvidedException;
+import com.nnk.springboot.exceptions.RatingNullPointerException;
 import com.nnk.springboot.services.impl.RatingService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -43,12 +45,18 @@ public class RatingController {
 
     @PostMapping("/rating/validate")
     @Valid
-    public String validate(@Valid RatingDto rating, BindingResult result, Model model) {
-        if (!result.hasErrors()) {
-            RatingDto dto = this.service.create(rating);
-            model.addAttribute("rating", dto);
+    public String validate(@Valid RatingDto rating, BindingResult result, Model model) throws SQLSyntaxErrorException {
+        try {
+            if (!result.hasErrors()) {
+                RatingDto dto = this.service.create(rating);
+                model.addAttribute("rating", dto);
+            }
+            return "redirect:/rating/list";
+        } catch (RatingNullPointerException e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("rating", new RatingDto());
+            return "rating/add";
         }
-        return "redirect:/rating/list";
     }
 
     @GetMapping("/rating/update/{id}")

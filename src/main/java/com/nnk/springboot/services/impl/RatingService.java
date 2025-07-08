@@ -33,10 +33,11 @@ public class RatingService {
     }
 
     public RatingDto create(RatingDto rating) {
-        if (Objects.isNull(rating)) {
-            throw new RatingNullPointerException();
+        if (Objects.isNull(rating) || (Objects.nonNull(rating.getOrderNumber()) && rating.getOrderNumber() >= 255)) {
+            throw new RatingNullPointerException("The rating is null or the order is too big.");
         }
-        RatingDto dto = this.mapper.toDto(this.repository.save(this.mapper.toModel(rating)));
+        RatingDto dto = null;
+        dto = this.mapper.toDto(this.repository.save(this.mapper.toModel(rating)));
         if (Objects.isNull(dto)) {
             throw new RatingNullPointerException("The rating could not be created. Please, try again.", HttpStatus.BAD_REQUEST);
         }
