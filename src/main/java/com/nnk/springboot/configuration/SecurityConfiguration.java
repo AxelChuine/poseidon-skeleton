@@ -4,8 +4,6 @@ import com.nnk.springboot.security.CustomAuthenticationSuccessHandler;
 import com.nnk.springboot.security.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,6 +25,14 @@ public class SecurityConfiguration {
     }
 
 
+    /**
+     * Authorize every page to a normal user but only allow admins to access the user/list page
+     *
+     * Create the default login page but use a custom authentication success handler to redirect to the correct page
+     * @param http
+     * @return
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
@@ -46,13 +52,6 @@ public class SecurityConfiguration {
                                 formLogin.successHandler(customAuthenticationSuccessHandler())
                 )
                 .build();
-    }
-
-    @Bean
-    AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder encoder) throws Exception {
-        AuthenticationManagerBuilder builder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        builder.userDetailsService(customUserDetailsService).passwordEncoder(encoder);
-        return builder.build();
     }
 
     @Bean

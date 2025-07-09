@@ -11,6 +11,9 @@ import java.io.IOException;
 
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     /**
+     * redirect an admin to the user/list page.
+     * If not admin, redirect to bidList/list page.
+     *
      * @param request
      * @param response
      * @param authentication
