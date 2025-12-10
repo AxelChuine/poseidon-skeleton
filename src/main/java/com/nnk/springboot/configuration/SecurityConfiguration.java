@@ -30,7 +30,7 @@ public class SecurityConfiguration {
      *
      * Create the default login page but use a custom authentication success handler to redirect to the correct page
      * @param http
-     * @return
+     * @return SecurityFilterChain
      * @throws Exception
      */
     @Bean

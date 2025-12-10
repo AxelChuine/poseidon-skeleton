@@ -55,4 +55,8 @@ public class BidListService implements IService<BidListDto> {
         Optional<BidList> optional = repository.findById(id);
         return this.mapper.toDto(optional.orElse(null));
     }
+
+    public void test() {
+
+    }
 }
